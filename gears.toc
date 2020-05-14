@@ -1,0 +1,38 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\babel@toc {english}{}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {1}Tooth Profile}{3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2}Drawing a Gear}{3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3}Calculating Gear and teeth Size}{4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.1}Circular Gears.}{4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.2}Rectangular Gears}{6}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.3}Elliptical Gears}{6}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.4}Other Non Circular Gears}{6}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.5}Examples}{6}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Circular gears with given gear ratio and centerdistance}{6}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4}Rack and Pinion}{7}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.1}Constant rotational Speed}{7}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.2}Non-constant rotational Speed}{7}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {4.2.1}Continuous functions}{7}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {4.2.2}Discontinuous functions}{7}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.3}Non-constant shaft position}{7}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.4}Examples}{7}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Shaft following a Sinus(t) curve}{7}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{cos(t)}{7}%
