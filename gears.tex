@@ -44,6 +44,7 @@ date=short                % Datumsformat
 \usepackage{subcaption}
 \usepackage{float}
 %\usepackage[dvipsnames]{xcolor}
+\usepackage[ruled,vlined]{algorithm2e}
 
 
 
@@ -195,7 +196,7 @@ date=short                % Datumsformat
 
 \newcounter{myalgctr}
 
-\newenvironment{mydef}{%      define a custom environment
+\newenvironment{mydefinition}{%      define a custom environment
 	\bigskip\noindent%         create a vertical offset to previous material
 	\refstepcounter{myalgctr}% increment the environment's counter
 	\textsc{\textbf{Definition} \themyalgctr}% or \textbf, \textit, ...
@@ -203,7 +204,7 @@ date=short                % Datumsformat
 }{\par\bigskip}  %          create a vertical offset to following material
 \numberwithin{myalgctr}{section}
 
-\crefname{myalgctr}{Definition}{Definitionen}
+\crefname{myalgctr}{definition}{definitions}
 
 \newcounter{mytheoremctr}
 
@@ -215,7 +216,7 @@ date=short                % Datumsformat
 }{\par\bigskip}  %          create a vertical offset to following material
 \numberwithin{mytheoremctr}{section}
 
-\crefname{mytheoremctr}{Theorem}{Theorem}
+\crefname{mytheoremctr}{theorem}{theorems}
 
 \newenvironment{myproof}{%      define a custom environment
 	\bigskip\noindent%         create a vertical offset to previous material
@@ -309,7 +310,7 @@ date=short                % Datumsformat
 	
 	\newpage
 	\section{Tooth Profile}
-		Since FDM 3d printed gears are weak and therefore torque and transmission efficiency is not as important we are going to use a circular tooth profile. Please note that this profile is not optimal but it is easy to calculate non circular gears and it is sufficient for most 3d printed parts. If this is not suitable for your design take a look at involute gears.\\
+		Since FDM 3d printed gears are weak and therefore torque and transmission efficiency is not as important we are going to use a circular tooth profile. Please note that this profile is not optimal but it makes it incredibly easy to calculate and draw non circular gears. It is sufficient for most 3d printed parts. If this is not suitable for your design take a look at involute gears.\\
 		\begin{figure}[!h]
 			\centering
 %		\begin{tikzpicture}[scale=1]
@@ -372,7 +373,7 @@ date=short                % Datumsformat
 		%abbidung close up 3 zaehne
 	
 	\section{Drawing a Gear}
-	Start by drawing the general shape of your gear. As we will see in \cref{non-circular} this can be any convex shape. As an example we will take a look at a circular gear. Then, using a compas, mark points with distance $r$ on the outline of your shape and draw a circle with radius $r$ on every second mark. 
+	Start by drawing the general shape of the gear. As we will see in \cref{non-circular} this can be any convex shape. As an example we will take a look at a circular gear. Then, using a compas, mark points with distance $r$ on the outline of your shape and draw a circle with radius $r$ on every second mark. 
 	\begin{figure}[h!]
 			\begin{tikzpicture}[x=1mm,y=1mm,scale = 2]
 			\draw[dashed] (0,0) circle[radius = 7.508037642];
@@ -425,14 +426,62 @@ date=short                % Datumsformat
 	\end{figure}
 	
 	\newpage
-	\section{Calculating Gear and teeth Size}
-	\subsection{Circular Gears.}
+	\section{Notation}
+	A gear can be represented as a tupel which consists of the gear shape together with the number of teeth, the radius of each tooth, a set containing the centerpoints of each tooth and the centerpoint of the gear itself.
+	
+	
+	\begin{mydefinition}
+		A tupel $(\gamma, n, r, (m_i)_{i\in\mathbb{Z}_{2n}}, M)$ where $\gamma:[0,2\pi)\to\mathbb{R}^k$, $k\in\mathbb{N},n\in2\mathbb{N}$, $r\in\mathbb{R}$, $m_i\in\gamma[[0,2\pi)]:d(m_i,m_{i+1})=r$ and $M\in\mathbb{R}^k$ is called a gear. 
+	\end{mydefinition}
+
+	If $\gamma$ is a circle we will sometimes replace it with its radius $R\in\mathbb{R}$.
+	Furthermore $M$ is defined as point with distance $d(M,\gamma(\varphi)) = ||\gamma(\varphi)||_2, \forall\varphi\in[0,2\pi)$. Since $M$ is defined by $\gamma$ it is not required. However we will only omit $M$ if it is $0$.
+	
+	
+	\begin{mydefinition}
+		Two gears are of the same size or shape, if it is possible to map the image of $\gamma_A$ to the image of $\gamma_B$ without changing its size:
+		\begin{align}
+		\exists\iota: d(\iota(x),\iota(y))=d(x,y)\land\iota(\gamma_A[[0,2\pi)]) = \gamma_B[[0,2\pi)].\label{imp:sim}
+		\end{align}
+		We call two gears $A$ and $B$ similar and write $A\sim B$ if they are of the same size and
+		\begin{gather*}
+		n_A=n_B\\
+		r_A=r_B\\
+		\iota[(m_{A,i})_{i\in\mathbb{Z}_{2n_A}}] = (m_{B,j})_{j\in\mathbb{Z}_{2n_B}}
+		\end{gather*}
+		where $\iota$ is an isometric function that satisfies \eqref{imp:sim}.
+		
+	\end{mydefinition}
+
+	\begin{myproof}
+		
+		
+		For this definition to make sense $\sim$ needs to be reflexive, symmetric and transitive.\\
+		{ "$A\sim A$":}\par
+		Let $\iota$ be the identity.\\
+		{ "$A\sim B\implies B\sim A$":}\par
+		As $\iota$ is an isometric isomorphism it is bijective and therefore its inverse $\iota^{-1}$ exists. Using $\iota^{-1}$, $B\sim A$.\\
+		{ "$A\sim B\land B\sim C\implies A\sim C$":}\par
+		The composition of two isometric isomorphisms is an isometric isomorphism and therefore $A\sim C$.
+	\end{myproof}
+	
+	
+	\begin{mydefinition}
+		Two gears $A$ and $B$ fit together if 
+		\begin{align*}
+			r_A=r_B.
+		\end{align*}
+	\end{mydefinition}
+	
+	
+	\section{Calculating Gear and teeth Size}\label{section-gears}
+	\subsection{Circular Gears}\label{section-circ}
 	Designing a circular gear is straightforward. We start by drawing a circle $K$ with radius $R$. This will be the size of our final gear. We then look for a sequence of smaller circles $(k_i)_{i\in I}$ with radius $r$ such that their center is on $K$, they intersect each other on $K$, they cover $K$ completely and the number of $k_i$ must be even ($|I|=2n : n\in \mathbb{N}$). This is important since the number of teeth has to be a positive integer. 
 	
 	%abbildung kreise auf dem kreis
 	
 	
-	\begin{mytheorem}
+	\begin{mytheorem}\label{theorem-circle}
 		Given a circle $K$ with radius $R$ and $n\in\mathbb{N}$, it is possible to find a sequence of $n$ circles $(k_i)_{i\in I}$ with radius $r$ and center $(m_i)_{i\in I}\in K$ such that $|\{x\in K:d(x,m_i)>r,\forall i\in I\}|=0$ and $|\{x\in K:\exists i,j\in I,d(x,m_i)\leq r\land d(x,m_j)\leq r\}| = n$. Where $d(x,y)$ is the distance between $x$ and $y$. Let $\varphi = \frac{2Pi}{n}$ then
 		\begin{align}
 		R= \frac{r\cdot\cos\left( \frac{\varphi }{4}\right) }{\sin(\frac{\varphi}{2})}.\label{eq:R-r}
@@ -484,12 +533,39 @@ date=short                % Datumsformat
 		
 	\end{myproof}
 	
+
+	\subsection{Rectangular Gears}\label{section-rect}
 	
-	\newpage
-	\subsection{Rectangular Gears}
-	\subsection{Elliptical Gears}
+	\begin{mytheorem}\label{therem-rectangle}
+		%If all four corners of a rectangle $K$ are in $\{m_i:i\in I\}$ and 
+		Let $K$ be a rectangle with side lengths of $a$ and $b$. It is possible to find a sequence of circles $(k_i)_{i\in I}$ with the same properties as in \cref{theorem-circle} if $4r\mid a$ and $4r\mid b$. Furthermore all four corners of $K$ are in $\{m_i:i\in I\}$, where $m_i$ is the center of $k_i$.
+	\end{mytheorem}
+
+	\begin{myproof}
+		It is easy to see that \cref{therem-rectangle} holds true.
+	\end{myproof}
+	
+	
 	\subsection{Other Non Circular Gears}\label{non-circular}
-	
+	\begin{mytheorem}\label{theorem:non-circular}
+		Let $\gamma$ be a simple, closed curve where the enclosed area is convex. $\gamma$ can be used as a gear outline. Furthermore the sequence of circlecenters $\{m_i:i\in I\}$ can be calculated using:\\
+		
+		\begin{algorithm}[H]
+			\SetAlgoLined
+			\KwResult{Write here the result }
+			I = 2 times number of teeth\;
+			\While{While condition}{
+				instructions\;
+				\eIf{condition}{
+					instructions1\;
+					instructions2\;
+				}{
+					instructions3\;
+				}
+			}
+			\caption{Calculating $\{m_i:i\in I\}$}
+		\end{algorithm}
+	\end{mytheorem}
 	
 	\subsection{Examples}
 	\myexample{Circular gears with given gear ratio and centerdistance}
@@ -502,9 +578,9 @@ date=short                % Datumsformat
 	Using \cref{eq:R-r} we also know that:
 	\begin{align*}
 	\varphi_1 &= \frac{2Pi}{n_1}\\
-	R_1&= \frac{r*\cos\left( \frac{\varphi_1 }{4}\right) }{\sin(\frac{\varphi}{2})}\\
+	R_1&= \frac{r*\cos\left( \frac{\varphi_1 }{4}\right) }{\sin(\frac{\varphi_1}{2})}\\
 	\varphi_2 &= \frac{2Pi}{n_2}\\
-	R_2&= \frac{r*\cos\left( \frac{\varphi_2 }{4}\right) }{\sin(\frac{\varphi}{2})}
+	R_2&= \frac{r*\cos\left( \frac{\varphi_2 }{4}\right) }{\sin(\frac{\varphi_2}{2})}
 	\end{align*}
 	If we specify the number of teeth on either one of them lets say
 	\begin{align*}
@@ -564,21 +640,230 @@ date=short                % Datumsformat
 	\end{figure}
 	
 	
+	\myexample{Internal ring gear}
+	A internal ring gear $K_r$ with outer diameter $D_r = 5$ should be calculated such that a smaller gear $K$ can be used to archive a $5:1$  gear reduction. The two shafts should be $1cm$ apart.\\
+	As the two shafts are $15mm$ apart we know that
+	\begin{align*}
+		R_r-R=15.
+	\end{align*}
+	Furthermore 
+	\begin{align*}
+		n_r = 5\cdot n
+	\end{align*} 
+	to achieve the required $5:1$ ratio.
+		Using \cref{eq:R-r} we also know that:
+	\begin{align*}
+	\varphi_r &= \frac{2Pi}{n_r}\\
+	R_r&= \frac{r*\cos\left( \frac{\varphi_r }{4}\right) }{\sin(\frac{\varphi_r}{2})}\\
+	\varphi&= \frac{2Pi}{n}\\
+	R&= \frac{r*\cos\left( \frac{\varphi }{4}\right) }{\sin(\frac{\varphi}{2})}
+	\end{align*}
+	If we specify the number of teeth on either one of them lets say
+	\begin{align*}
+	n=8,
+	\end{align*}
+	we can solve the system of equations using wolframalpha, maple or another computerprogram to find a unique solution. In this example we get:
+	\begin{align*}
+	r &= 1.474527091\\
+	R_r &= 18.77908826\\
+	R &= 3.779088256\\
+	n_r &= 40\\
+	n &= 8\\
+	\varphi_r &= 0.1570796327\\
+	\varphi &= 0.7853981635
+	\end{align*}
 	
-	\begin{itemize}
-		\item[I:] $R_1 + R_2 = 30$
-	\end{itemize}
+	\begin{figure}[h!]
+		\centering
+		\begin{tikzpicture}[x=1mm,y=1mm]
+		\coordinate (m1) at (0,0);
+		\coordinate (m2) at (0,-15);
+		%\path (m1)  + ({22.49085405 * cos(0)},{22.49085405 * sin(0)}) arc[radius = 22.49085405, start angle=0,end angle =360] coordinate[pos=0] (km1) ;
+		%\draw[dashed] (m1)  + ({22.49085405 * cos(0)},{22.49085405 * sin(0)}) arc[radius = 22.49085405, start angle=0,end angle =360] coordinate[pos={8/360}] (km2) ;
+		%\draw[dashed] (m2)  + ({7.508037642 * cos(0)},{7.508037642 * sin(0)}) arc[radius = 7.508037642, start angle=0,end angle =360] ;
+		
+		\draw (m1)  + ({25 * cos(0)},{25 * sin(0)}) arc[radius = 25, start angle=0,end angle =360] ;
+		%big gear
+		\foreach \i in {0,1, ...,20}{
+			\begin{scope}[rotate around={\i*18:(m1)}]
+			%nach aussen
+			\draw (18.77908826,0) + ({1.4745270918 * cos(-97.87500000)},{1.474527091* sin(-97.87500000)}) arc[radius=1.474527091,start angle = -97.87500000,end angle = 95.87500000];
+			%nach innen
+			\draw ({18.77908826*cos(9)},{18.77908826*sin(9)}) + ({1.474527091 * cos(-84)},{1.474527091 * sin(-84)}) arc[radius=1.474527091,start angle = -74.37500000,end angle = -268.125];
+			\end{scope}
+		}
+		
+		%small gear
+		\foreach \i in {0,1, ...,4}{
+			\begin{scope}[rotate around={\i*90:(m2)}]
+			%nach aussen
+			\draw (m2) ++ (-90:3.779088256) ++ ({1.474527091 * cos(-202.5)},{1.474527091 * sin(-202.5)}) arc[radius=1.474527091,start angle = -202.5,end angle = 22.5];
+			%nach innen
+			\draw (m2) ++ ({-90+45}:3.779088256) ++ ({1.474527091 * cos(67.5)},{1.474527091 * sin(67.5)}) arc[radius=1.474527091,start angle = 67.5,end angle = 202.5];
+			\end{scope}
+		}
+		%radii
+		\draw[|<->|] (m1) -- +(m2) node[pos=0.5,right] {\footnotesize$15mm$};
+		
+		
+		\end{tikzpicture}
+		\caption{Resulting internal ring gear}
+	\end{figure}
+	
+	
+	\myexample{Planetary gears (epicyclic gear train)}
+	
+	\myexample{Rectangular gear with given tooth size $r$}
+	
+	\myexample{Rectangular and circular gears with given gear ratio and centerdistance}
 	
 	
 	
 	
 	
-	\section{Rack and Pinion}\label{rack}
+	
+	\newpage
+	\section{Rack and Pinion}\label{section-rack}
+	In order to translate linear motion to rotation and vice versa a rack and pinion can be used. As seen in \cref{section-gears} it is possible to calculate and draw a gearprofile.
+	
+	
+	\begin{figure}[h!]
+		\centering
+		\begin{tikzpicture}[x=1mm,y=1mm]
+		\coordinate (m1) at (0,0);
+		%radius = 22.49196236
+		%big gear
+		\foreach \i in {0,1, ...,24}{
+			\begin{scope}[rotate around={\i*15:(m1)}]
+			%nach aussen
+			\draw (22.49196236,0) + ({1.471832758 * cos(-97.87500000)},{1.471832758 * sin(-97.87500000)}) arc[radius=1.471832758,start angle = -97.87500000,end angle = 95.87500000];
+			%nach innen
+			\draw ({22.49196236*cos(7.5)},{22.49196236*sin(7.5)}) + ({1.471832758 * cos(-84)},{1.471832758 * sin(-84)}) arc[radius=1.471832758,start angle = -74.37500000,end angle = -268.125];
+			\end{scope}
+		}
+	
+		\draw (-51.51414653,-32.49196236) -- (48.570481014,-32.49196236);
+		\foreach \i in {0,1, ...,16}{
+			\draw ({-51.51414653+1.471832758 + 4*1.471832758*\i},-22.49196236) + ({1.471832758 * cos(0)},{1.471832758 * sin(0)}) arc[radius=1.471832758,start angle = 0,end angle = 180];
+			\draw ({-51.51414653+1.471832758 + 2*1.471832758 + 4*1.471832758*\i},-22.49196236) + ({1.471832758 * cos(0)},{1.471832758 * sin(0)}) arc[radius=1.471832758,start angle = 0,end angle = -180];
+		}
+%		\draw ({-51.51414653+1.471832758 + 4*1.471832758*17},-22.49196236) + ({1.471832758 * cos(0)},{1.471832758 * sin(0)}) arc[radius=1.471832758,start angle = 0,end angle = 180];
+		
+		\draw (-51.51414653,-32.49196236) to[out=135,in=-45] (-51.51414653,-22.49196236);
+		\draw (48.570481014,-32.49196236) to[out=135,in=-45] (48.570481014,-22.49196236);
+		
+		%arrows:
+		\draw[<->] (135:10) to[out=45,in=135] (45:10);
+		\draw[<->] (-10,-27.49196236) to (10,-27.49196236);
+		
+		\end{tikzpicture}
+		\caption{Rack and Pinion}
+	\end{figure}
+	
+	
+	
+	
 	\subsection{Constant rotational Speed}
+	\begin{mytheorem}
+		Let $K$ be a circular gear with not moving center $M$ and $R$ a corresponding rack. There exists a homomorphism $\Psi$ such that $\Psi(s) = \varphi$, where $s$ is the distance $R$ is moved and $\varphi$  the angle $K$ is rotated around $M$. If $R$ is moved at a constant speed, the rotational speed of $K$ will be constant.
+	\end{mytheorem}
+
+	\begin{myproof}
+		Assuming there is no play in this system $K$ can be viewed as a circle with radius $r$ and the rack $R$ as a tangent line. The length of an arc can be calculated using
+		\begin{align*}
+			l=r\cdot \varphi
+		\end{align*}
+		and therefore
+		\begin{align*}
+			\varphi=\frac{l}{r}.
+		\end{align*}
+		Since there is no play, the length $l$ of the arc will be equal to the distance $s$, $R$ was moved and 
+		\begin{align*}
+			\Psi(s) = \frac{s}{r}.
+		\end{align*}
+		It is easy to see that $\Psi(\lambda\cdot s) = \lambda\cdot\Psi(s)$. As $\Psi$ is a composition of continuous functions it is continuous. \\
+		\\
+		If $R$ is moving with constant speed $v(t)=\frac{s(t)}{t}=s(1)$, $v'=0$. The rotational speed of $K$, $\omega(t)=\frac{\varphi}{t}$ can be calculated using $\Psi$.
+		\begin{align*}
+			\omega(t)&= \frac{\Psi(s(t))}{t} = \frac{t\cdot\Psi(s(1))}{t} = \Psi(s(1)) = \Psi(v(t))\\
+		\end{align*}
+		As $v$ is constant so is $\Psi(v)$ and thus $\omega$ is constant.
+		
+		%ABSOLUT FALSCH!!!!
+		%psi(c1) = c2 ist die richtige begruendung
+	\end{myproof}
+	
 	\subsection{Non-constant rotational Speed}
-	\subsubsection{Continuous functions}
-	\subsubsection{Discontinuous functions}
+	If a non-circular gear is used as a pinion and a rack is made in a way that the center of the gear does not move the resulting rotational speed will be non constant. This behavior can be used to calculate a special gear shape such that the rotational speed follows a given curve. Leading to the following theorem:\\
+	
+	\begin{mytheorem}
+		Given a periodic, continuous function $f$. If $\gamma''(\varphi)\leq K''(\varphi)$ where
+		\begin{align}
+			\gamma(\varphi)= 
+			\begin{pmatrix}
+				\frac{1}{f(\varphi)}\cos(\varphi)\\
+				\frac{1}{f(\varphi)}\sin(\varphi)
+			\end{pmatrix},
+		\end{align}
+		$\gamma$ will be simple, closed and the enclosed area will be convex. $\gamma$ can therefore be used as a gear outline. Furthermore, if a fitting rack moves with constant speed $c$, the rotational speed of this gear will be $cf(\varphi)$.
+	\end{mytheorem}
+
+\begin{myproof}
+	
+\end{myproof}
 	\subsection{Non-constant shaft position}
+	If it is necessary that the shaft rotates and changes position a control cam can be used (\cref{fig:shaftposition}). By restricting the shaft position in the x direction it will follow the racks shape if they stay in contact. If no rotation is required a control cam in the required shape should be used on its own.
+	
+	
+	
+	
+		\begin{figure}[h!]
+		\centering
+		\begin{tikzpicture}[x=1mm,y=1mm]
+		\coordinate (m2) at (0,0);
+		%radius = 22.49196236
+		%small gear
+		\foreach \i in {0,1, ...,8}{
+			\begin{scope}[rotate around={\i*45:(m2)}]
+			%nach aussen
+			\draw (-7.508037642,0) + ({1.471832758 * cos(-88.62500000)},{1.471832758 * sin(-88.62500000)}) arc[radius=1.471832758,start angle = -88.62500000,end angle = 88.62500000];
+			%nach innen
+			\draw (m2) ++ ({180-45/2}:7.508037642) ++ ({1.471832758 * cos(-110.12500000)},{1.471832758 * sin(-110.12500000)}) arc[radius=1.471832758,start angle = -110.12500000,end angle = -294.875];
+			\end{scope}
+		}
+		
+		%rack
+		\draw (-51.51414653,-32.49196236) -- (48.570481014,-32.49196236);
+%		\foreach \i in {0,1, ...,16}{
+%			\draw ({-51.51414653+1.471832758 + 4*1.471832758*\i},-22.49196236) + ({1.471832758 * cos(0)},{1.471832758 * sin(0)}) arc[radius=1.471832758,start angle = 0,end angle = 180];
+%			\draw ({-51.51414653+1.471832758 + 2*1.471832758 + 4*1.471832758*\i},-22.49196236) + ({1.471832758 * cos(0)},{1.471832758 * sin(0)}) arc[radius=1.471832758,start angle = 0,end angle = -180];
+%		}
+		
+		\draw[domain=-51.51414653:48.570481014,smooth,variable=\x,blue] plot ({\x},{5*sin(\x*5) -18.0});
+		
+		
+		\draw (-51.51414653,-32.49196236) to[out=135,in=-45] (-51.51414653,-13.0);
+		\draw (48.570481014,-32.49196236) to[out=135,in=-45] (48.570481014,-22.49196236);
+		
+		%arrows:
+		\draw[<->] (135:10) to[out=45,in=135] (45:10);
+		\draw[<->] (-10,-27.49196236) to (10,-27.49196236);
+		
+		\end{tikzpicture}
+		\caption{Rack and Pinion}\label{fig:shaftposition}
+	\end{figure}
+
+	\begin{mytheorem}
+		Let $K$ be a circular gear with radius $r$ and center $m$ where $m_x$ is constant and $f\in C^2([0,2\pi))$ with $|f''(\varphi)| < |K''(\varphi)|$. $f$ can be used as an outline for a rack $R$ and $m_y$ will follow the curve $f+c,c\in\mathbb{R}$.
+	\end{mytheorem}\label{theorem:shaft-pos}
+
+	\begin{myproof}
+		Using \cref{theorem:non-circular} it is possible to calculate a gear profile for $K$ and $R$. Since $K$ is circular and always touching $R$, the distance between $m$ and $R$ is $r$. It is easy to see that $|f''(\varphi)| < |K''(\varphi)|$ implies that $K$ is touching $R$ in no more than one point. Thus $m_y = f(\varphi) + r + c$ where $c$ depends on the total thickness of $R$. A proper proof is omitted since it is easy to see that \cref{theorem:shaft-pos} holds true.
+	\end{myproof}
+	
+	
+	
+	
 	\subsection{Examples}
 	\myexample{Shaft following a Sinus(t) curve}
 	We want a gear such that the shaft is following a $\sin(t)$ curve. We know that $\sin(t)$ is a $2\pi$ periodic function with $\sin(t)>0,t\in(0,\pi)$ and $\sin(t)<0,t\in(\pi,2\pi)$. As seen in \cref{rack} this will result in a non convex gear shape. To use the method described in \cref{non-circular} we need a new function $g(t):=sin(t)+|min(sin[0,2\pi])|$. Thus $g(t)\geq0,t\in(0,2\pi)$ resulting in a convex gear shape. However the shaft will now follow $g(t)$ and not $\sin(t)$. Therefore we need to offset both the rack and pinion by $|min(sin[0,2\pi])|$.\\
