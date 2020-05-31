@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.5.5)  31 MAY 2020 20:10
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.5.5)  31 MAY 2020 21:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -810,6 +810,25 @@ Package: relsize 2013/03/29 ver 4.1
 \algocf@algoframe=\box65
 \algocf@algobox=\box66
 )
+(/usr/local/texlive/2020/texmf-dist/tex/latex/csquotes/csquotes.sty
+Package: csquotes 2019-12-06 v5.2j context-sensitive quotations (JAW)
+\csq@reset=\count419
+\csq@gtype=\count420
+\csq@glevel=\count421
+\csq@qlevel=\count422
+\csq@maxlvl=\count423
+\csq@tshold=\count424
+\csq@ltx@everypar=\toks34
+
+(/usr/local/texlive/2020/texmf-dist/tex/latex/csquotes/csquotes.def
+File: csquotes.def 2019-12-06 v5.2j csquotes generic definitions (JAW)
+)
+Package csquotes Info: Trying to load configuration file 'csquotes.cfg'...
+Package csquotes Info: ... configuration file loaded successfully.
+
+(/usr/local/texlive/2020/texmf-dist/tex/latex/csquotes/csquotes.cfg
+File: csquotes.cfg 
+))
 (/usr/local/texlive/2020/texmf-dist/tex/latex/xcolor/xcolor.sty
 Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
 
@@ -826,16 +845,16 @@ Package: array 2019/08/31 v2.4l Tabular extension package (FMi)
 \col@sep=\dimen188
 \ar@mcellbox=\box67
 \extrarowheight=\dimen189
-\NC@list=\toks34
+\NC@list=\toks35
 \extratabsurround=\skip152
 \backup@length=\skip153
 \ar@cellbox=\box68
 )
-\everycr=\toks35
+\everycr=\toks36
 \minrowclearance=\skip154
 )
 LaTeX Info: Redefining \color on input line 709.
-\rownum=\count419
+\rownum=\count425
 Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1348.
 Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1352.
 Package xcolor Info: Model `RGB' extended on input line 1364.
@@ -851,11 +870,11 @@ File: dvipsnam.def 2016/06/17 v3.0m Driver-dependent file (DPC,SPQR)
 ))
 (/usr/local/texlive/2020/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
 Package: fancyvrb 2020/05/03 v3.6 verbatim text (tvz,hv)
-\FV@CodeLineNo=\count420
+\FV@CodeLineNo=\count426
 \FV@InFile=\read4
 \FV@TabBox=\box69
-\c@FancyVerbLine=\count421
-\FV@StepNumber=\count422
+\c@FancyVerbLine=\count427
+\FV@StepNumber=\count428
 \FV@OutFile=\write4
 )
 (/usr/local/texlive/2020/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty
@@ -863,7 +882,7 @@ Package: fancyvrb 2020/05/03 v3.6 verbatim text (tvz,hv)
 (/usr/local/texlive/2020/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty
 (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.te
 x
-\pgfutil@everybye=\toks36
+\pgfutil@everybye=\toks37
 \pgfutil@tempdima=\dimen190
 \pgfutil@tempdimb=\dimen191
 
@@ -885,12 +904,12 @@ Package: pgf 2020/01/08 v3.1.5b (3.1.5b)
 (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/systemlayer/pgfsys.code.tex
 Package: pgfsys 2020/01/08 v3.1.5b (3.1.5b)
 (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex
-\pgfkeys@pathtoks=\toks37
-\pgfkeys@temptoks=\toks38
+\pgfkeys@pathtoks=\toks38
+\pgfkeys@temptoks=\toks39
 
 (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/utilities/pgfkeysfiltered.c
 ode.tex
-\pgfkeys@tmptoks=\toks39
+\pgfkeys@tmptoks=\toks40
 ))
 \pgf@x=\dimen192
 \pgf@y=\dimen193
@@ -904,14 +923,14 @@ ode.tex
 \pgf@yd=\dimen257
 \w@pgf@writea=\write5
 \r@pgf@reada=\read5
-\c@pgf@counta=\count423
-\c@pgf@countb=\count424
-\c@pgf@countc=\count425
-\c@pgf@countd=\count426
-\t@pgf@toka=\toks40
-\t@pgf@tokb=\toks41
-\t@pgf@tokc=\toks42
-\pgf@sys@id@count=\count427
+\c@pgf@counta=\count429
+\c@pgf@countb=\count430
+\c@pgf@countc=\count431
+\c@pgf@countd=\count432
+\t@pgf@toka=\toks41
+\t@pgf@tokb=\toks42
+\t@pgf@tokc=\toks43
+\pgf@sys@id@count=\count433
 
 (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/systemlayer/pgf.cfg
 File: pgf.cfg 2020/01/08 v3.1.5b (3.1.5b)
@@ -929,8 +948,8 @@ File: pgfsys-common-pdf.def 2020/01/08 v3.1.5b (3.1.5b)
 (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/systemlayer/pgfsyssoftpath.
 code.tex
 File: pgfsyssoftpath.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgfsyssoftpath@smallbuffer@items=\count428
-\pgfsyssoftpath@bigbuffer@items=\count429
+\pgfsyssoftpath@smallbuffer@items=\count434
+\pgfsyssoftpath@bigbuffer@items=\count435
 )
 (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/systemlayer/pgfsysprotocol.
 code.tex
@@ -943,11 +962,11 @@ Package: pgfcore 2020/01/08 v3.1.5b (3.1.5b)
 (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/math/pgfmathutil.code.tex)
 (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/math/pgfmathparser.code.tex
 \pgfmath@dimen=\dimen258
-\pgfmath@count=\count430
+\pgfmath@count=\count436
 \pgfmath@box=\box71
-\pgfmath@toks=\toks43
-\pgfmath@stack@operand=\toks44
-\pgfmath@stack@operation=\toks45
+\pgfmath@toks=\toks44
+\pgfmath@stack@operand=\toks45
+\pgfmath@stack@operation=\toks46
 )
 (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.code.
 tex
@@ -968,7 +987,7 @@ code.tex)
 (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.integ
 erarithmetics.code.tex)))
 (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/math/pgfmathfloat.code.tex
-\c@pgfmathroundto@lastzeros=\count431
+\c@pgfmathroundto@lastzeros=\count437
 )) (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/math/pgfint.code.tex)
 (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepoints.co
 de.tex
@@ -1006,7 +1025,7 @@ File: pgfcorescopes.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 \pgfpic=\box72
 \pgf@hbox=\box73
 \pgf@layerbox@main=\box74
-\pgf@picture@serial@count=\count432
+\pgf@picture@serial@count=\count438
 )
 (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/basiclayer/pgfcoregraphicst
 ate.code.tex
@@ -1041,8 +1060,8 @@ File: pgfcorearrows.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 e.tex
 File: pgfcoreshade.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 \pgf@max=\dimen282
-\pgf@sys@shading@range@num=\count433
-\pgf@shadingcount=\count434
+\pgf@sys@shading@range@num=\count439
+\pgf@shadingcount=\count440
 )
 (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreimage.cod
 e.tex
@@ -1099,8 +1118,8 @@ Package: pgffor 2020/01/08 v3.1.5b (3.1.5b)
 (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex)
 \pgffor@iter=\dimen285
 \pgffor@skip=\dimen286
-\pgffor@stack=\toks46
-\pgffor@toks=\toks47
+\pgffor@stack=\toks47
+\pgffor@toks=\toks48
 ))
 (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tikz.cod
 e.tex
@@ -1109,7 +1128,7 @@ Package: tikz 2020/01/08 v3.1.5b (3.1.5b)
 (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothan
 dlers.code.tex
 File: pgflibraryplothandlers.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgf@plot@mark@count=\count435
+\pgf@plot@mark@count=\count441
 \pgfplotmarksize=\dimen287
 )
 \tikz@lastx=\dimen288
@@ -1124,19 +1143,19 @@ File: pgflibraryplothandlers.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 \tikz@figbox@bg=\box78
 \tikz@tempbox=\box79
 \tikz@tempbox@bg=\box80
-\tikztreelevel=\count436
-\tikznumberofchildren=\count437
-\tikznumberofcurrentchild=\count438
-\tikz@fig@count=\count439
+\tikztreelevel=\count442
+\tikznumberofchildren=\count443
+\tikznumberofcurrentchild=\count444
+\tikz@fig@count=\count445
 
 (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/modules/pgfmodulematrix.cod
 e.tex
 File: pgfmodulematrix.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgfmatrixcurrentrow=\count440
-\pgfmatrixcurrentcolumn=\count441
-\pgf@matrix@numberofcolumns=\count442
+\pgfmatrixcurrentrow=\count446
+\pgfmatrixcurrentcolumn=\count447
+\pgf@matrix@numberofcolumns=\count448
 )
-\tikz@expandcount=\count443
+\tikz@expandcount=\count449
 
 (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/frontendlayer/tikz/librarie
 s/tikzlibrarytopaths.code.tex
@@ -1196,17 +1215,14 @@ File: lstmisc.sty 2020/03/24 1.8d (Carsten Heinz)
 (/usr/local/texlive/2020/texmf-dist/tex/latex/oberdiek/twoopt.sty
 Package: twoopt 2016/05/16 v1.6 Definitions with two optional arguments (HO)
 )
-\c@myalgctr=\count444
-\c@mytheoremctr=\count445
-\c@myexamplectr=\count446
-
-
-Package biblatex Warning: 'babel/polyglossia' detected but 'csquotes' missing.
-(biblatex)                Loading 'csquotes' recommended.
-
-\@quotelevel=\count447
-\@quotereset=\count448
-(./gears.aux)
+\c@myalgctr=\count450
+\c@mytheoremctr=\count451
+\c@myexamplectr=\count452
+Package csquotes Info: Checking for multilingual support...
+Package csquotes Info: ... found 'babel' package.
+Package csquotes Info: Adjusting default style.
+Package csquotes Info: Redefining alias 'default' -> 'english'.
+ (./gears.aux)
 \openout1 = `gears.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 254.
@@ -1228,8 +1244,7 @@ Package scrbase Info: activating english \listfigurename on input line 254.
 Package scrbase Info: activating english \listtablename on input line 254.
 Package biblatex Info: Trying to load language 'english'...
 Package biblatex Info: ... file 'english.lbx' found.
-
-(/usr/local/texlive/2020/texmf-dist/tex/latex/biblatex/lbx/english.lbx
+ (/usr/local/texlive/2020/texmf-dist/tex/latex/biblatex/lbx/english.lbx
 File: english.lbx 2019/12/01 v3.14 biblatex localization (PK/MW)
 )
 Package biblatex Info: Input encoding 'utf8' detected.
@@ -1246,17 +1261,17 @@ Package biblatex Info: Reference segment=0 on input line 254.
 
 (/usr/local/texlive/2020/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count449
+\scratchcounter=\count453
 \scratchdimen=\dimen297
 \scratchbox=\box82
-\nofMPsegments=\count450
-\nofMParguments=\count451
-\everyMPshowfont=\toks48
-\MPscratchCnt=\count452
+\nofMPsegments=\count454
+\nofMParguments=\count455
+\everyMPshowfont=\toks49
+\MPscratchCnt=\count456
 \MPscratchDim=\dimen298
-\MPnumerator=\count453
-\makeMPintoPDFobject=\count454
-\everyMPtoPDFconversion=\toks49
+\MPnumerator=\count457
+\makeMPintoPDFobject=\count458
+\everyMPtoPDFconversion=\toks50
 ) (/usr/local/texlive/2020/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
@@ -1266,7 +1281,7 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-\c@lstlisting=\count455
+\c@lstlisting=\count459
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1369,70 +1384,60 @@ File: t1cmss.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-
-LaTeX Warning: Citation 'inscribedangle' on page 5 undefined on input line 521.
-
-
 [5]
 Underfull \hbox (badness 10000) in paragraph at lines 550--552
 
  []
 
-[6] [7] [8] [9]
-Underfull \hbox (badness 10000) in paragraph at lines 783--787
-
- []
-
-[10]
-Underfull \hbox (badness 10000) in paragraph at lines 797--798
-
- []
-
+[6] [7] [8]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[11]
-
-LaTeX Warning: Reference `rack' on page 1 undefined on input line 869.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 869--871
+[9] [10]
+Underfull \hbox (badness 10000) in paragraph at lines 820--824
 
  []
 
-[12]
 
-LaTeX Warning: Empty bibliography on input line 876.
+Underfull \hbox (badness 10000) in paragraph at lines 834--835
 
+ []
+
+[11]
+
+LaTeX Warning: Reference `rack' on page 1 undefined on input line 906.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 906--908
+
+ []
+
+[12] [13]
+LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 9
+13.
+ (/usr/local/texlive/2020/texmf-dist/tex/latex/base/t1cmtt.fd
+File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
+)
 (./gears.lof)
 \tf@lof=\write7
 \openout7 = `gears.lof'.
 
- (./gears.lot)
-\tf@lot=\write8
-\openout8 = `gears.lot'.
-
- [13] (./gears.aux)
+ [14] (./gears.aux)
 
 LaTeX Warning: There were undefined references.
-
-
-Package biblatex Warning: Please (re)run Biber on the file:
-(biblatex)                gears
-(biblatex)                and rerun LaTeX afterwards.
 
 Package logreq Info: Writing requests to 'gears.run.xml'.
 \openout1 = `gears.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 32911 strings out of 480682
- 641135 string characters out of 5904649
- 1363061 words of memory out of 5000000
- 48226 multiletter control sequences out of 15000+600000
- 552958 words of font info for 69 fonts, out of 8000000 for 9000
+ 33543 strings out of 480682
+ 652327 string characters out of 5904649
+ 1385489 words of memory out of 5000000
+ 48849 multiletter control sequences out of 15000+600000
+ 553271 words of font info for 70 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 64i,15n,81p,10100b,1812s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 64i,15n,81p,10100b,1900s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}
 </usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><
 /usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></
@@ -1457,11 +1462,12 @@ texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2020/te
 xmf-dist/fonts/type1/public/cm-super/sfrm1440.pfb></usr/local/texlive/2020/texm
 f-dist/fonts/type1/public/cm-super/sfti1200.pfb></usr/local/texlive/2020/texmf-
 dist/fonts/type1/public/cm-super/sfti1728.pfb></usr/local/texlive/2020/texmf-di
-st/fonts/type1/public/cm-super/sfxc1200.pfb>
-Output written on gears.pdf (13 pages, 324829 bytes).
+st/fonts/type1/public/cm-super/sftt1200.pfb></usr/local/texlive/2020/texmf-dist
+/fonts/type1/public/cm-super/sfxc1200.pfb>
+Output written on gears.pdf (14 pages, 361420 bytes).
 PDF statistics:
- 148 PDF objects out of 1000 (max. 8388607)
- 107 compressed objects within 2 object streams
+ 155 PDF objects out of 1000 (max. 8388607)
+ 112 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

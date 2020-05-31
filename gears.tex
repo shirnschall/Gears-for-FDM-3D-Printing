@@ -45,7 +45,7 @@ date=short                % Datumsformat
 \usepackage{float}
 %\usepackage[dvipsnames]{xcolor}
 \usepackage[ruled,vlined]{algorithm2e}
-
+\usepackage{csquotes}
 
 
 \usepackage[table,xcdraw,dvipsnames]{xcolor}
@@ -709,6 +709,43 @@ date=short                % Datumsformat
 		\end{tikzpicture}
 		\caption{Resulting internal ring gear}
 	\end{figure}
+
+	\begin{figure}[h!]
+		\centering
+		\begin{tikzpicture}[x=1mm,y=1mm]
+		\coordinate (m1) at (0,0);
+		\coordinate (m2) at (0,-15);
+		%\path (m1)  + ({22.49085405 * cos(0)},{22.49085405 * sin(0)}) arc[radius = 22.49085405, start angle=0,end angle =360] coordinate[pos=0] (km1) ;
+		%\draw[dashed] (m1)  + ({22.49085405 * cos(0)},{22.49085405 * sin(0)}) arc[radius = 22.49085405, start angle=0,end angle =360] coordinate[pos={8/360}] (km2) ;
+		%\draw[dashed] (m2)  + ({7.508037642 * cos(0)},{7.508037642 * sin(0)}) arc[radius = 7.508037642, start angle=0,end angle =360] ;
+		
+		\draw (m1)  + ({25 * cos(0)},{25 * sin(0)}) arc[radius = 25, start angle=0,end angle =360] ;
+		%big gear
+		\foreach \i in {0,1, ...,60}{
+			\begin{scope}[rotate around={\i*6:(m1)}]
+			%nach aussen
+			\draw (18.77908826,0) + ({.4909439976 * cos(-97.87500000)},{.4909439976* sin(-97.87500000)}) arc[radius=.4909439976,start angle = -97.87500000,end angle = 95.87500000];
+			%nach innen
+			\draw ({18.77908826*cos(9)},{18.77908826*sin(9)}) + ({.4909439976 * cos(-84)},{.4909439976 * sin(-84)}) arc[radius=.4909439976,start angle = -74.37500000,end angle = -268.125];
+			\end{scope}
+		}
+		
+		%small gear
+		\foreach \i in {0,1, ...,12}{
+			\begin{scope}[rotate around={\i*30:(m2)}]
+			%nach aussen
+			\draw (m2) ++ (-90:3.779088256) ++ ({.4909439976 * cos(-187.5)},{.4909439976 * sin(-187.5)}) arc[radius=.4909439976,start angle = -187.5,end angle = 7.5];
+			%nach innen
+			\draw (m2) ++ ({-90+15}:3.779088256) ++ ({.4909439976 * cos(7.5)},{.4909439976 * sin(7.5)}) arc[radius=.4909439976,start angle = 7.5,end angle = 187.5];
+			\end{scope}
+		}
+		%radii
+		\draw[|<->|] (m1) -- +(m2) node[pos=0.5,right] {\footnotesize$15mm$};
+		
+		
+		\end{tikzpicture}
+		\caption{Resulting internal ring gear}
+	\end{figure}	
 	
 	
 	\myexample{Planetary gears (epicyclic gear train)}
@@ -874,10 +911,10 @@ date=short                % Datumsformat
 	
 	\newpage
 	\printbibliography
-	\newpage
+	%\newpage
 	\listoffigures
-	\thispagestyle{firststyle}
-	\listoftables
+	%\thispagestyle{firststyle}
+	%\listoftables
 	\thispagestyle{firststyle}
 	
 	\newpage
