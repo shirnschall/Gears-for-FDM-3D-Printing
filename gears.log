@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.5.5)  31 MAY 2020 21:26
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.5.5)  6 JUN 2020 16:17
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1218,33 +1218,43 @@ Package: twoopt 2016/05/16 v1.6 Definitions with two optional arguments (HO)
 \c@myalgctr=\count450
 \c@mytheoremctr=\count451
 \c@myexamplectr=\count452
+
+(/usr/local/texlive/2020/texmf-dist/tex/latex/base/makeidx.sty
+Package: makeidx 2014/09/29 v1.0m Standard LaTeX package
+)
+\@indexfile=\write6
+\openout6 = `gears.idx'.
+
+
+Writing index file gears.idx
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... found 'babel' package.
 Package csquotes Info: Adjusting default style.
 Package csquotes Info: Redefining alias 'default' -> 'english'.
- (./gears.aux)
+(./gears.aux)
 \openout1 = `gears.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 254.
-LaTeX Font Info:    ... okay on input line 254.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 254.
-LaTeX Font Info:    ... okay on input line 254.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 254.
-LaTeX Font Info:    ... okay on input line 254.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 254.
-LaTeX Font Info:    ... okay on input line 254.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 254.
-LaTeX Font Info:    ... okay on input line 254.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 254.
-LaTeX Font Info:    ... okay on input line 254.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 254.
-LaTeX Font Info:    ... okay on input line 254.
-Package scrbase Info: activating english \contentsname on input line 254.
-Package scrbase Info: activating english \listfigurename on input line 254.
-Package scrbase Info: activating english \listtablename on input line 254.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 261.
+LaTeX Font Info:    ... okay on input line 261.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 261.
+LaTeX Font Info:    ... okay on input line 261.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 261.
+LaTeX Font Info:    ... okay on input line 261.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 261.
+LaTeX Font Info:    ... okay on input line 261.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 261.
+LaTeX Font Info:    ... okay on input line 261.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 261.
+LaTeX Font Info:    ... okay on input line 261.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 261.
+LaTeX Font Info:    ... okay on input line 261.
+Package scrbase Info: activating english \contentsname on input line 261.
+Package scrbase Info: activating english \listfigurename on input line 261.
+Package scrbase Info: activating english \listtablename on input line 261.
 Package biblatex Info: Trying to load language 'english'...
 Package biblatex Info: ... file 'english.lbx' found.
- (/usr/local/texlive/2020/texmf-dist/tex/latex/biblatex/lbx/english.lbx
+
+(/usr/local/texlive/2020/texmf-dist/tex/latex/biblatex/lbx/english.lbx
 File: english.lbx 2019/12/01 v3.14 biblatex localization (PK/MW)
 )
 Package biblatex Info: Input encoding 'utf8' detected.
@@ -1256,8 +1266,8 @@ Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'gears.bbl' found.
 
 (./gears.bbl)
-Package biblatex Info: Reference section=0 on input line 254.
-Package biblatex Info: Reference segment=0 on input line 254.
+Package biblatex Info: Reference section=0 on input line 261.
+Package biblatex Info: Reference segment=0 on input line 261.
 
 (/usr/local/texlive/2020/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -1353,13 +1363,13 @@ ABD: EveryShipout initializing macros
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Font Info:    Trying to load font information for U+msa on input line 293
+LaTeX Font Info:    Trying to load font information for U+msa on input line 300
 .
 
 (/usr/local/texlive/2020/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 293
+LaTeX Font Info:    Trying to load font information for U+msb on input line 300
 .
 
 (/usr/local/texlive/2020/texmf-dist/tex/latex/amsfonts/umsb.fd
@@ -1369,60 +1379,70 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 {/usr/local/texlive/2020/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 LaTeX Font Info:    Trying to load font information for T1+cmss on input line 3
-08.
+15.
 
 (/usr/local/texlive/2020/texmf-dist/tex/latex/base/t1cmss.fd
 File: t1cmss.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 ) (./gears.toc)
-\tf@toc=\write6
-\openout6 = `gears.toc'.
+\tf@toc=\write7
+\openout7 = `gears.toc'.
 
 
 [2
 
-] [3] [4]
+] [3] [4] [5] [6]
+Underfull \hbox (badness 10000) in paragraph at lines 565--567
+
+ []
+
+[7]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[5]
-Underfull \hbox (badness 10000) in paragraph at lines 550--552
+[8] [9]
+Overfull \hbox (2.61047pt too wide) in paragraph at lines 693--767
+[][] [] 
+ []
+
+[10] [11]
+Underfull \hbox (badness 10000) in paragraph at lines 926--930
 
  []
 
-[6] [7] [8]
+[12]
+Underfull \hbox (badness 10000) in paragraph at lines 940--941
+
+ []
+
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[9] [10]
-Underfull \hbox (badness 10000) in paragraph at lines 820--824
+[13]
+
+LaTeX Warning: Reference `rack' on page 1 undefined on input line 1012.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1012--1014
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 834--835
-
- []
-
-[11]
-
-LaTeX Warning: Reference `rack' on page 1 undefined on input line 906.
+[14] (./gears.ind [15
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 906--908
+])
+LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 1
+021.
 
- []
-
-[12] [13]
-LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 9
-13.
- (/usr/local/texlive/2020/texmf-dist/tex/latex/base/t1cmtt.fd
+(/usr/local/texlive/2020/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
-)
-(./gears.lof)
-\tf@lof=\write7
-\openout7 = `gears.lof'.
+) (./gears.lof)
+\tf@lof=\write8
+\openout8 = `gears.lof'.
 
- [14] (./gears.aux)
+
+[16
+
+] (./gears.aux)
 
 LaTeX Warning: There were undefined references.
 
@@ -1431,13 +1451,13 @@ Package logreq Info: Writing requests to 'gears.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 33543 strings out of 480682
- 652327 string characters out of 5904649
- 1385489 words of memory out of 5000000
- 48849 multiletter control sequences out of 15000+600000
- 553271 words of font info for 70 fonts, out of 8000000 for 9000
+ 33649 strings out of 480682
+ 654280 string characters out of 5904649
+ 1389039 words of memory out of 5000000
+ 48946 multiletter control sequences out of 15000+600000
+ 556356 words of font info for 78 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 64i,15n,81p,10100b,1900s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 64i,15n,81p,10100b,1898s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}
 </usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><
 /usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></
@@ -1458,16 +1478,20 @@ ve/2020/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/local/texlive
 /2020/texmf-dist/fonts/type1/public/cm-super/sfbx1728.pfb></usr/local/texlive/2
 020/texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb></usr/local/texlive/202
 0/texmf-dist/fonts/type1/public/cm-super/sfcc1200.pfb></usr/local/texlive/2020/
-texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2020/te
-xmf-dist/fonts/type1/public/cm-super/sfrm1440.pfb></usr/local/texlive/2020/texm
-f-dist/fonts/type1/public/cm-super/sfti1200.pfb></usr/local/texlive/2020/texmf-
-dist/fonts/type1/public/cm-super/sfti1728.pfb></usr/local/texlive/2020/texmf-di
-st/fonts/type1/public/cm-super/sftt1200.pfb></usr/local/texlive/2020/texmf-dist
-/fonts/type1/public/cm-super/sfxc1200.pfb>
-Output written on gears.pdf (14 pages, 361420 bytes).
+texmf-dist/fonts/type1/public/cm-super/sfrm0700.pfb></usr/local/texlive/2020/te
+xmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/local/texlive/2020/texm
+f-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/local/texlive/2020/texmf-
+dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/local/texlive/2020/texmf-di
+st/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2020/texmf-dist
+/fonts/type1/public/cm-super/sfrm1440.pfb></usr/local/texlive/2020/texmf-dist/f
+onts/type1/public/cm-super/sfti1200.pfb></usr/local/texlive/2020/texmf-dist/fon
+ts/type1/public/cm-super/sfti1728.pfb></usr/local/texlive/2020/texmf-dist/fonts
+/type1/public/cm-super/sftt1200.pfb></usr/local/texlive/2020/texmf-dist/fonts/t
+ype1/public/cm-super/sfxc1200.pfb>
+Output written on gears.pdf (16 pages, 416767 bytes).
 PDF statistics:
- 155 PDF objects out of 1000 (max. 8388607)
- 112 compressed objects within 2 object streams
+ 177 PDF objects out of 1000 (max. 8388607)
+ 128 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

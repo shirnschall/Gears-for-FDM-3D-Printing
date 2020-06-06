@@ -204,7 +204,7 @@ date=short                % Datumsformat
 }{\par\bigskip}  %          create a vertical offset to following material
 \numberwithin{myalgctr}{section}
 
-\crefname{myalgctr}{definition}{definitions}
+\crefname{myalgctr}{Definition}{Definitions}
 
 \newcounter{mytheoremctr}
 
@@ -216,7 +216,7 @@ date=short                % Datumsformat
 }{\par\bigskip}  %          create a vertical offset to following material
 \numberwithin{mytheoremctr}{section}
 
-\crefname{mytheoremctr}{theorem}{theorems}
+\crefname{mytheoremctr}{Theorem}{Theorems}
 
 \newenvironment{myproof}{%      define a custom environment
 	\bigskip\noindent%         create a vertical offset to previous material
@@ -236,6 +236,8 @@ date=short                % Datumsformat
 	\par}
 \numberwithin{myexamplectr}{subsection}
 
+\crefname{example}{Example}{Examples}
+
 %\renewenvironment{proof}[1][Beweis]{\begin{trivlist}
 %		\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
 %\newenvironment{example}[1][Beispiel]{\begin{trivlist}
@@ -249,6 +251,11 @@ date=short                % Datumsformat
 %	\vrule height0.75em width0.5em depth0.25em\fi}
 
 \newcommand{\mpar}[1]{\paragraph*{#1}\mbox{}\par}
+
+\usepackage{makeidx}
+\makeindex
+\newcommand{\ind}[1]{\textit{#1}\index{#1}}
+
 
 
 \begin{document}
@@ -310,7 +317,7 @@ date=short                % Datumsformat
 	
 	\newpage
 	\section{Tooth Profile}
-		Since FDM 3d printed gears are weak and therefore torque and transmission efficiency is not as important we are going to use a circular tooth profile. Please note that this profile is not optimal but it makes it incredibly easy to calculate and draw non circular gears. It is sufficient for most 3d printed parts. If this is not suitable for your design take a look at involute gears.\\
+		Since FDM 3d printed gears are weak and therefore torque and transmission efficiency is not as important we are going to use a circular \ind{tooth profile}. Please note that this profile is not optimal but it makes it incredibly easy to calculate and draw non circular gears. It is sufficient for most 3d printed parts. If this is not suitable for your design take a look at involute gears.\\
 		\begin{figure}[!h]
 			\centering
 %		\begin{tikzpicture}[scale=1]
@@ -372,8 +379,8 @@ date=short                % Datumsformat
 		\end{figure}
 		%abbidung close up 3 zaehne
 	
-	\section{Drawing a Gear}
-	Start by drawing the general shape of the gear. As we will see in \cref{non-circular} this can be any convex shape. As an example we will take a look at a circular gear. Then, using a compas, mark points with distance $r$ on the outline of your shape and draw a circle with radius $r$ on every second mark. 
+	\subsection{Drawing a Gear}\label{sec:drawing}
+	Start by drawing the outline of the gear. As we will see in \cref{non-circular} this can be any convex shape. As an example we will take a look at a circular gear. Then, using a compas, mark points with distance $r$ on the outline of your shape and draw a circle with radius $r$ on every second mark. We will see in \cref{section-gears} or in the examples how to calculate $r$.
 	\begin{figure}[h!]
 			\begin{tikzpicture}[x=1mm,y=1mm,scale = 2]
 			\draw[dashed] (0,0) circle[radius = 7.508037642];
@@ -427,29 +434,43 @@ date=short                % Datumsformat
 	
 	\newpage
 	\section{Notation}
-	A gear can be represented as a tupel which consists of the gear shape together with the number of teeth, the radius of each tooth, a set containing the centerpoints of each tooth and the centerpoint of the gear itself.
+	To analyze different gear shapes and calculate the \ind{tooth size} $r$ we need to grasp what a gear is mathematically. As seen in the previous chapter, a gear is constituted by the \ind{gear shape} together with the number of teeth, the size (radius) of each tooth, a set containing the centerpoints of each tooth and the \ind{centerpoint} of the gear itself. This leads to the following definition:
 	
 	
-	\begin{mydefinition}
-		A tupel $(\gamma, n, r, (m_i)_{i\in\mathbb{Z}_{2n}}, M)$ where $\gamma:[0,2\pi)\to\mathbb{R}^k$, $k\in\mathbb{N},n\in2\mathbb{N}$, $r\in\mathbb{R}$, $m_i\in\gamma[[0,2\pi)]:d(m_i,m_{i+1})=r$ and $M\in\mathbb{R}^k$ is called a gear. 
+	\begin{mydefinition}\label{def:gear1}
+		\index{$\gamma$}\index{$n$}\index{$r$}\index{$m_0$}\index{$(m_i)_{i\in\mathbb{Z}_{2n}}$}\index{$M$}
+		A tuple $(\gamma, n, r, m_0, M)$ where $\gamma:[0,2\pi)\to\mathbb{R}^2$ is a simple closed curve, $n\in\mathbb{N}$, $r\in\mathbb{R}$, $m_0\in\gamma[[0,2\pi)]$ and $M\in\mathbb{R}^2$ is called a \ind{gear} if the enclosed area of $\gamma$ is convex. 
 	\end{mydefinition}
 
+	At this point it is not clear if a gear is well-defined as \cref{def:gear1} demands only a single tooth-centerpoint $m_0$ and not a set containing every tooth-centerpoint. The fact that $(m_i)_{i\in\mathbb{Z}_{2n}}$ can be represented by $m_0$ is one of the findings of \cref{theorem:non-circular}.
+	\newline
 	If $\gamma$ is a circle we will sometimes replace it with its radius $R\in\mathbb{R}$.
 	Furthermore $M$ is defined as point with distance $d(M,\gamma(\varphi)) = ||\gamma(\varphi)||_2, \forall\varphi\in[0,2\pi)$. Since $M$ is defined by $\gamma$ it is not required. However we will only omit $M$ if it is $0$.
 	
-	
 	\begin{mydefinition}
-		Two gears are of the same size or shape, if it is possible to map the image of $\gamma_A$ to the image of $\gamma_B$ without changing its size:
+		Two gears $A$ and $B$ \ind{fit together} if 
+		\begin{align*}
+		r_A=r_B.
+		\end{align*}
+	\end{mydefinition}
+	
+	\begin{mydefinition}\label{def:rel}
+		Two gears $A$ and $B$ are of the \ind{same size} or shape, if it is possible to map the image of $\gamma_A$ to the image of $\gamma_B$ without changing its size:
 		\begin{align}
 		\exists\iota: d(\iota(x),\iota(y))=d(x,y)\land\iota(\gamma_A[[0,2\pi)]) = \gamma_B[[0,2\pi)].\label{imp:sim}
 		\end{align}
-		We call two gears $A$ and $B$ similar and write $A\sim B$ if they are of the same size and
+		We call two gears $A$ and $B$ \ind{similar}\index{$\sim$} and write $A\sim B$ if they are of the same size and
 		\begin{gather*}
 		n_A=n_B\\
 		r_A=r_B\\
-		\iota[(m_{A,i})_{i\in\mathbb{Z}_{2n_A}}] = (m_{B,j})_{j\in\mathbb{Z}_{2n_B}}
+		\iota(m_{A,0}) = m_{B,0}
 		\end{gather*}
-		where $\iota$ is an isometric function that satisfies \eqref{imp:sim}.
+		where $\iota$ is an isometric function that satisfies \eqref{imp:sim}.\\
+		Furthermore $A=B$\index{$=$} if $A\sim B$ and $\iota=\text{id}$.
+%		As $d(m_i,m_{i+1})=r$, $(m_{A,i})_{i\in\mathbb{Z}_{2n_A}}$ is defined by $m_0$ and $r$ and therefore
+%		\begin{align*}
+%			\iota(m_{A,0}) = m_{B,0}\implies\iota[(m_{A,i})_{i\in\mathbb{Z}_{2n_A}}] = (m_{B,j})_{j\in\mathbb{Z}_{2n_B}}.
+%		\end{align*}
 		
 	\end{mydefinition}
 
@@ -458,31 +479,25 @@ date=short                % Datumsformat
 		
 		For this definition to make sense $\sim$ needs to be reflexive, symmetric and transitive.\\
 		{ "$A\sim A$":}\par
-		Let $\iota$ be the identity.\\
+		Let $\iota$ be the identity function.\\
 		{ "$A\sim B\implies B\sim A$":}\par
 		As $\iota$ is an isometric isomorphism it is bijective and therefore its inverse $\iota^{-1}$ exists. Using $\iota^{-1}$, $B\sim A$.\\
 		{ "$A\sim B\land B\sim C\implies A\sim C$":}\par
 		The composition of two isometric isomorphisms is an isometric isomorphism and therefore $A\sim C$.
 	\end{myproof}
 	
-	
-	\begin{mydefinition}
-		Two gears $A$ and $B$ fit together if 
-		\begin{align*}
-			r_A=r_B.
-		\end{align*}
-	\end{mydefinition}
-	
-	
+	\newpage
 	\section{Calculating Gear and teeth Size}\label{section-gears}
 	\subsection{Circular Gears}\label{section-circ}
-	Designing a circular gear is straightforward. We start by drawing a circle $K$ with radius $R$. This will be the size of our final gear. We then look for a sequence of smaller circles $(k_i)_{i\in I}$ with radius $r$ such that their center is on $K$, they intersect each other on $K$, they cover $K$ completely and the number of $k_i$ must be even ($|I|=2n : n\in \mathbb{N}$). This is important since the number of teeth has to be a positive integer. 
+	%Designing a circular gear is straightforward. We start by drawing a circle $K$ with radius $R$. This will be the size of our final gear. We then look for a sequence of smaller circles $(k_i)_{i\in I}$ with radius $r$ such that their center is on $K$, they intersect each other on $K$, they cover $K$ completely and the number of $k_i$ must be even ($|I|=2n : n\in \mathbb{N}$). This is important since the number of teeth has to be a positive integer. 
+	
+	We have already seen how to draw a circular gear $K=(R,n,r,m_0,M)$ in \cref{sec:drawing}. However $r$ has to be chosen in a way that it is possible to find a set of $2n$ points $(m_i)_{i\in\mathbb{Z}_{2n}}\in\gamma[[0,2\pi)]:d(m_i,m_{i+1})=r$.
 	
 	%abbildung kreise auf dem kreis
 	
 	
 	\begin{mytheorem}\label{theorem-circle}
-		Given a circle $K$ with radius $R$ and $n\in\mathbb{N}$, it is possible to find a sequence of $n$ circles $(k_i)_{i\in I}$ with radius $r$ and center $(m_i)_{i\in I}\in K$ such that $|\{x\in K:d(x,m_i)>r,\forall i\in I\}|=0$ and $|\{x\in K:\exists i,j\in I,d(x,m_i)\leq r\land d(x,m_j)\leq r\}| = n$. Where $d(x,y)$ is the distance between $x$ and $y$. Let $\varphi = \frac{2Pi}{n}$ then
+		Given a circle $\gamma$ with radius $R$ and $n\in\mathbb{N}$, it is possible to find a sequence of $2n$ points $(m_i)_{i\in\mathbb{Z}_{2n}}\in\gamma[[0,2\pi)]:d(m_i,m_{i+1})=r$. Let $\varphi = \frac{Pi}{n}$ then
 		\begin{align}
 		R= \frac{r\cdot\cos\left( \frac{\varphi }{4}\right) }{\sin(\frac{\varphi}{2})}.\label{eq:R-r}
 		\end{align}
@@ -518,7 +533,7 @@ date=short                % Datumsformat
 			\end{tikzpicture}
 		\end{figure}
 		
-		Let $\alpha\coloneqq\sphericalangle {m_3m_2m_1}$, $\varphi\coloneqq\sphericalangle {m_1Mm_3}$ and $d\coloneqq\overline{m_3m_1}$. Using the inscribed angle theorem\autocite{inscribedangle}, we know that $\alpha=\frac{2\pi - \varphi}{2}$. By drawing a line from $M$ to $m$ we get two right triangles. $\overline{Mm_2}$ also halves  $\varphi$, $\alpha$ and $d$. Thus
+		Let $\alpha\coloneqq\sphericalangle {m_3m_2m_1}$, $\varphi\coloneqq\sphericalangle {m_1Mm_3}$ and $d\coloneqq\overline{m_3m_1}$. Using the inscribed angle theorem\autocite{inscribedangle}, we know that $\alpha=\frac{2\pi - \varphi}{2}$. By drawing a line from $M$ to $m$ we get two right triangles. $\overline{Mm_2}$ also bisects  $\varphi$, $\alpha$ and $d$. Thus
 		\begin{align}
 			\frac{d}{2} = r\cdot\sin\left(\frac{\alpha}{2}\right)\label{eq:d}
 		\end{align}
@@ -568,7 +583,7 @@ date=short                % Datumsformat
 	\end{mytheorem}
 	
 	\subsection{Examples}
-	\myexample{Circular gears with given gear ratio and centerdistance}
+	\myexample{Circular gears with given gear ratio and centerdistance}\label[example]{ex:circ}
 	Lets say we want a 3:1 gear reduction and the center points of each gear should be 30mm apart. We can now start to build a system of equations:
 	\begin{align*}
 	R_1 + R_2 &= 30\\
@@ -673,82 +688,173 @@ date=short                % Datumsformat
 	\varphi &= 0.7853981635
 	\end{align*}
 	
-	\begin{figure}[h!]
+
+	\begin{figure}[H]
+		\begin{subfigure}[t]{0.5\textwidth}
+			\centering
+			\begin{tikzpicture}[x=1mm,y=1mm]
+			\coordinate (m1) at (0,0);
+			\coordinate (m2) at (0,-15);
+			%\path (m1)  + ({22.49085405 * cos(0)},{22.49085405 * sin(0)}) arc[radius = 22.49085405, start angle=0,end angle =360] coordinate[pos=0] (km1) ;
+			%\draw[dashed] (m1)  + ({22.49085405 * cos(0)},{22.49085405 * sin(0)}) arc[radius = 22.49085405, start angle=0,end angle =360] coordinate[pos={8/360}] (km2) ;
+			%\draw[dashed] (m2)  + ({7.508037642 * cos(0)},{7.508037642 * sin(0)}) arc[radius = 7.508037642, start angle=0,end angle =360] ;
+			
+			\draw (m1)  + ({25 * cos(0)},{25 * sin(0)}) arc[radius = 25, start angle=0,end angle =360] ;
+			%big gear
+			\foreach \i in {0,1, ...,20}{
+				\begin{scope}[rotate around={\i*18:(m1)}]
+				%nach aussen
+				\draw (18.77908826,0) + ({1.4745270918 * cos(-97.87500000)},{1.474527091* sin(-97.87500000)}) arc[radius=1.474527091,start angle = -97.87500000,end angle = 95.87500000];
+				%nach innen
+				\draw ({18.77908826*cos(9)},{18.77908826*sin(9)}) + ({1.474527091 * cos(-84)},{1.474527091 * sin(-84)}) arc[radius=1.474527091,start angle = -74.37500000,end angle = -268.125];
+				\end{scope}
+			}
+			
+			%small gear
+			\foreach \i in {0,1, ...,4}{
+				\begin{scope}[rotate around={\i*90:(m2)}]
+				%nach aussen
+				\draw (m2) ++ (-90:3.779088256) ++ ({1.474527091 * cos(-202.5)},{1.474527091 * sin(-202.5)}) arc[radius=1.474527091,start angle = -202.5,end angle = 22.5];
+				%nach innen
+				\draw (m2) ++ ({-90+45}:3.779088256) ++ ({1.474527091 * cos(67.5)},{1.474527091 * sin(67.5)}) arc[radius=1.474527091,start angle = 67.5,end angle = 202.5];
+				\end{scope}
+			}
+			%radii
+			\draw[|<->|] (m1) -- +(m2) node[pos=0.5,right] {\footnotesize$15mm$};
+			
+			
+			\end{tikzpicture}
+			\subcaption{$n=8$}
+			\label{fig:precond-vs-cg}	
+		\end{subfigure}
+		\begin{subfigure}[t]{0.5\textwidth}
+			\centering
+			\begin{tikzpicture}[x=1mm,y=1mm]
+			\coordinate (m1) at (0,0);
+			\coordinate (m2) at (0,-15);
+			%\path (m1)  + ({22.49085405 * cos(0)},{22.49085405 * sin(0)}) arc[radius = 22.49085405, start angle=0,end angle =360] coordinate[pos=0] (km1) ;
+			%\draw[dashed] (m1)  + ({22.49085405 * cos(0)},{22.49085405 * sin(0)}) arc[radius = 22.49085405, start angle=0,end angle =360] coordinate[pos={8/360}] (km2) ;
+			%\draw[dashed] (m2)  + ({7.508037642 * cos(0)},{7.508037642 * sin(0)}) arc[radius = 7.508037642, start angle=0,end angle =360] ;
+			
+			\draw (m1)  + ({25 * cos(0)},{25 * sin(0)}) arc[radius = 25, start angle=0,end angle =360] ;
+			%big gear
+			\foreach \i in {0,1, ...,60}{
+				\begin{scope}[rotate around={\i*6:(m1)}]
+				%nach aussen
+				\draw (18.77908826,0) + ({.4909439976 * cos(-97.87500000)},{.4909439976* sin(-97.87500000)}) arc[radius=.4909439976,start angle = -97.87500000,end angle = 95.87500000];
+				%nach innen
+				\draw ({18.77908826*cos(9)},{18.77908826*sin(9)}) + ({.4909439976 * cos(-84)},{.4909439976 * sin(-84)}) arc[radius=.4909439976,start angle = -74.37500000,end angle = -268.125];
+				\end{scope}
+			}
+			
+			%small gear
+			\foreach \i in {0,1, ...,12}{
+				\begin{scope}[rotate around={\i*30:(m2)}]
+				%nach aussen
+				\draw (m2) ++ (-90:3.779088256) ++ ({.4909439976 * cos(-187.5)},{.4909439976 * sin(-187.5)}) arc[radius=.4909439976,start angle = -187.5,end angle = 7.5];
+				%nach innen
+				\draw (m2) ++ ({-90+15}:3.779088256) ++ ({.4909439976 * cos(7.5)},{.4909439976 * sin(7.5)}) arc[radius=.4909439976,start angle = 7.5,end angle = 187.5];
+				\end{scope}
+			}
+			%radii
+			\draw[|<->|] (m1) -- +(m2) node[pos=0.5,right] {\footnotesize$15mm$};
+			
+			
+			\end{tikzpicture}
+			\subcaption{$n=24$}
+			\label{fig:precond-vs-cg-ndiag}	
+		\end{subfigure}
+		
+		\caption{Resulting internal ring gears for different $n$}\label{fig:internal-ring-gear}
+	\end{figure}
+	
+	
+	\myexample{Planetary gearbox (epicyclic gear train)}
+	A planetary gearbox with not rotating ring gear and a gear ratio of 10:1 should be calculated.
+	Let $S$ be the sun gear, $P$ the planet gear and $R$ the outer ring gear and $C$ the carrier.\\
+	We know that for planetary gear systems
+	\begin{align*}
+		n_R=2\cdot n_P+n_S \implies \frac{n_S}{n_P}\omega _{S}+(2+\frac{n_S}{n_P})\omega _{R}-2(1+\frac{n_S}{n_P})\omega _{C}=0
+	\end{align*} 
+	where $\omega$ denotes the angular momentum. As the the outer ring gear $R$ is not rotating $\omega_R=0$. We can deduce that 
+	\begin{align*}
+		\frac{n_S}{n_P}\omega _{S} &= 2(1+\frac{n_S}{n_P})\omega _{C}\\
+		\frac{\omega_S}{\omega_C}&=\frac{2(1+\frac{n_S}{n_P})}{\frac{n_S}{n_P}}.
+	\end{align*}
+	As $S$ will be used as the input and $C$ as the output we know that
+	\begin{align*}
+		\frac{\omega_S}{\omega_C} = \frac{10}{1}
+	\end{align*}
+	and because the gears need to touch each other the radii have to satisfy
+	\begin{align*}
+		R_R=2\cdot R_P+R_S.
+	\end{align*}
+	We will use \cref{eq:R-r} to get one more equation per gear.\footnote{Take a look at \cref{ex:circ} to see this step in more detail.} After specifying the radius of the outer ring gear $R_R=30$ and $n_S=24$ we can solve the system of equation to get a unique solution. Since we want $4$ planet gears, the sun gear and the outer ring gear have to be symmetrical in both the $x$ and $y$ direction. This is guaranteed if $4\mid n_S$.
+		
+	\begin{figure}[H]
 		\centering
 		\begin{tikzpicture}[x=1mm,y=1mm]
-		\coordinate (m1) at (0,0);
-		\coordinate (m2) at (0,-15);
-		%\path (m1)  + ({22.49085405 * cos(0)},{22.49085405 * sin(0)}) arc[radius = 22.49085405, start angle=0,end angle =360] coordinate[pos=0] (km1) ;
-		%\draw[dashed] (m1)  + ({22.49085405 * cos(0)},{22.49085405 * sin(0)}) arc[radius = 22.49085405, start angle=0,end angle =360] coordinate[pos={8/360}] (km2) ;
-		%\draw[dashed] (m2)  + ({7.508037642 * cos(0)},{7.508037642 * sin(0)}) arc[radius = 7.508037642, start angle=0,end angle =360] ;
+			\coordinate (m1) at (0,0);
+			\coordinate (m2) at (0,-15);
+			%\path (m1)  + ({22.49085405 * cos(0)},{22.49085405 * sin(0)}) arc[radius = 22.49085405, start angle=0,end angle =360] coordinate[pos=0] (km1) ;
+			%\draw[dashed] (m1)  + ({22.49085405 * cos(0)},{22.49085405 * sin(0)}) arc[radius = 22.49085405, start angle=0,end angle =360] coordinate[pos={8/360}] (km2) ;
+			%\draw[dashed] (m2)  + ({7.508037642 * cos(0)},{7.508037642 * sin(0)}) arc[radius = 7.508037642, start angle=0,end angle =360] ;
+			
+			\draw (m1)++(35,0) arc[radius = 35, start angle=0,end angle =360] ;
+			%ring gear
+			\foreach \i in {0,1, ...,47}{
+				\begin{scope}[rotate around={\i*7.5:(m1)}]
+				%nach aussen
+				\draw (29.93575886,0) + ({.9813388677 * cos(-97.87500000)},{.9813388677* sin(-97.87500000)}) arc[radius=.9813388677,start angle = -97.87500000,end angle = 95.87500000];
+				%nach innen
+				\draw ({29.93575886*cos(3.75)},{29.93575886*sin(3.75)}) + ({.9813388677 * cos(-84)},{.9813388677 * sin(-84)}) arc[radius=.9813388677,start angle = -74.37500000,end angle = -268.125];
+				\end{scope}
+			}
 		
-		\draw (m1)  + ({25 * cos(0)},{25 * sin(0)}) arc[radius = 25, start angle=0,end angle =360] ;
-		%big gear
-		\foreach \i in {0,1, ...,20}{
-			\begin{scope}[rotate around={\i*18:(m1)}]
-			%nach aussen
-			\draw (18.77908826,0) + ({1.4745270918 * cos(-97.87500000)},{1.474527091* sin(-97.87500000)}) arc[radius=1.474527091,start angle = -97.87500000,end angle = 95.87500000];
-			%nach innen
-			\draw ({18.77908826*cos(9)},{18.77908826*sin(9)}) + ({1.474527091 * cos(-84)},{1.474527091 * sin(-84)}) arc[radius=1.474527091,start angle = -74.37500000,end angle = -268.125];
+			%sun gear
+			\begin{scope}[rotate around={15:(0,0)}]
+				\foreach \i in {0,1, ...,11}{
+					\begin{scope}[rotate around={\i*30:(m1)}]
+					%nach aussen
+					\draw (7.503214167,0) + ({.9813388677 * cos(-110)},{.9813388677* sin(-105)}) arc[radius=.9813388677,start angle = -105,end angle = 105];
+					%nach innen
+					\draw ({7.503214167*cos(15)},{7.503214167*sin(15)}) + ({.9813388677 * cos(-75)},{.9813388677 * sin(-75)}) arc[radius=.9813388677,start angle = -75,end angle = -255];
+					\end{scope}
+				}
 			\end{scope}
-		}
 		
-		%small gear
-		\foreach \i in {0,1, ...,4}{
-			\begin{scope}[rotate around={\i*90:(m2)}]
-			%nach aussen
-			\draw (m2) ++ (-90:3.779088256) ++ ({1.474527091 * cos(-202.5)},{1.474527091 * sin(-202.5)}) arc[radius=1.474527091,start angle = -202.5,end angle = 22.5];
-			%nach innen
-			\draw (m2) ++ ({-90+45}:3.779088256) ++ ({1.474527091 * cos(67.5)},{1.474527091 * sin(67.5)}) arc[radius=1.474527091,start angle = 67.5,end angle = 202.5];
-			\end{scope}
-		}
-		%radii
-		\draw[|<->|] (m1) -- +(m2) node[pos=0.5,right] {\footnotesize$15mm$};
+		
+			\foreach \i in {0,1, ...,3}{
+				
+				\node at (0+\i*90:18.751607087) {$\circ$};
+				
+				\begin{scope}[rotate around={\i*90:(m1) }]
+				%planet gear
+				\foreach \i in {0,1, ...,17}{
+					\begin{scope}[rotate around={\i*20:(-90:18.751607087) }]
+					%nach aussen	
+					\draw (-90:18.751607087) ++ (-90:11.24839292) ++ ({.9813388677 * cos(-190)},{.9813388677 * sin(-190)}) arc[radius=.9813388677,start angle = -190,end angle = 10];
+					%nach innen
+					\draw (-90:18.751607087) ++ ({-90+10}:11.24839292) ++ ({.9813388677 * cos(20)},{.9813388677 * sin(20)}) arc[radius=.9813388677,start angle = 20,end angle = 190];
+					\end{scope}
+				}
+				\end{scope}
+			}
+		
+		
+		%carrier
+		\draw (m1)++(21.751607087,0) arc[radius = 21.751607087, start angle=0,end angle =360] ;
+		\draw (m1)++(15.751607087,0) arc[radius = 15.751607087, start angle=0,end angle =360] ;
+		
+		%center point
+		\node at (0,0) {$\circ$};
 		
 		
 		\end{tikzpicture}
-		\caption{Resulting internal ring gear}
+		\caption{Resulting planetary gear system}
 	\end{figure}
 
-	\begin{figure}[h!]
-		\centering
-		\begin{tikzpicture}[x=1mm,y=1mm]
-		\coordinate (m1) at (0,0);
-		\coordinate (m2) at (0,-15);
-		%\path (m1)  + ({22.49085405 * cos(0)},{22.49085405 * sin(0)}) arc[radius = 22.49085405, start angle=0,end angle =360] coordinate[pos=0] (km1) ;
-		%\draw[dashed] (m1)  + ({22.49085405 * cos(0)},{22.49085405 * sin(0)}) arc[radius = 22.49085405, start angle=0,end angle =360] coordinate[pos={8/360}] (km2) ;
-		%\draw[dashed] (m2)  + ({7.508037642 * cos(0)},{7.508037642 * sin(0)}) arc[radius = 7.508037642, start angle=0,end angle =360] ;
-		
-		\draw (m1)  + ({25 * cos(0)},{25 * sin(0)}) arc[radius = 25, start angle=0,end angle =360] ;
-		%big gear
-		\foreach \i in {0,1, ...,60}{
-			\begin{scope}[rotate around={\i*6:(m1)}]
-			%nach aussen
-			\draw (18.77908826,0) + ({.4909439976 * cos(-97.87500000)},{.4909439976* sin(-97.87500000)}) arc[radius=.4909439976,start angle = -97.87500000,end angle = 95.87500000];
-			%nach innen
-			\draw ({18.77908826*cos(9)},{18.77908826*sin(9)}) + ({.4909439976 * cos(-84)},{.4909439976 * sin(-84)}) arc[radius=.4909439976,start angle = -74.37500000,end angle = -268.125];
-			\end{scope}
-		}
-		
-		%small gear
-		\foreach \i in {0,1, ...,12}{
-			\begin{scope}[rotate around={\i*30:(m2)}]
-			%nach aussen
-			\draw (m2) ++ (-90:3.779088256) ++ ({.4909439976 * cos(-187.5)},{.4909439976 * sin(-187.5)}) arc[radius=.4909439976,start angle = -187.5,end angle = 7.5];
-			%nach innen
-			\draw (m2) ++ ({-90+15}:3.779088256) ++ ({.4909439976 * cos(7.5)},{.4909439976 * sin(7.5)}) arc[radius=.4909439976,start angle = 7.5,end angle = 187.5];
-			\end{scope}
-		}
-		%radii
-		\draw[|<->|] (m1) -- +(m2) node[pos=0.5,right] {\footnotesize$15mm$};
-		
-		
-		\end{tikzpicture}
-		\caption{Resulting internal ring gear}
-	\end{figure}	
 	
-	
-	\myexample{Planetary gears (epicyclic gear train)}
 	
 	\myexample{Rectangular gear with given tooth size $r$}
 	
@@ -908,7 +1014,9 @@ date=short                % Datumsformat
 	\myexample{cos(t)}
 	
 	
-	
+	\newpage 
+	\printindex
+	\thispagestyle{firststyle}
 	\newpage
 	\printbibliography
 	%\newpage
