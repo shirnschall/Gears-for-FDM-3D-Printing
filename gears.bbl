@@ -1,5 +1,5 @@
 % $ biblatex auxiliary file $
-% $ biblatex bbl format version 3.1 $
+% $ biblatex bbl format version 3.0 $
 % Do not modify the above lines!
 %
 % This is an auxiliary file used by the 'biblatex' package.
@@ -21,7 +21,7 @@
   \datalist[entry]{nyt/global//global/global}
     \entry{inscribedangle}{online}{}
       \name{author}{1}{}{%
-        {{un=0,uniquepart=base,hash=819197bfeff32a3f58d49b2a3eb0a580}{%
+        {{uniquename=0,uniquepart=base,hash=819197bfeff32a3f58d49b2a3eb0a580}{%
            family={Weisstein},
            familyi={W\bibinitperiod},
            given={Eric\bibnamedelima W.},
@@ -35,7 +35,7 @@
       \strng{authornamehash}{819197bfeff32a3f58d49b2a3eb0a580}
       \strng{authorfullhash}{819197bfeff32a3f58d49b2a3eb0a580}
       \field{sortinit}{W}
-      \field{sortinithash}{1af34bd8c148ffb32de1494636b49713}
+      \field{sortinithash}{ecb89ff85896a47dc313960773ac311d}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{year}
       \field{labelnamesource}{author}
