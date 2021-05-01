@@ -12,4 +12,4 @@
 *.icloud
 *.gz
 *.synctex(busy)
-
+*.out

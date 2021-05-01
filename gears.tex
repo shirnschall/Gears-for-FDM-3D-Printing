@@ -389,6 +389,7 @@ date=short                % Datumsformat
 		%abbidung close up 3 zaehne
 	
 	\subsection{Drawing a Gear}\label{sec:drawing}
+	Start by drawing the outline of the gear. As we will see in \cref{non-circular} this can be any convex shape. As an example we will take a look at a circular gear. Then, using a compass, mark points with distance $r$ on the outline of your shape and draw a circle with radius $r$ on every second mark. We will see in \cref{section-gears} and in the examples how to calculate $r$.
 	\begin{figure}[h!]
 			\begin{tikzpicture}[x=1mm,y=1mm,scale = 2]
 			\draw[dashed] (0,0) circle[radius = 7.508037642];
@@ -491,9 +492,9 @@ date=short                % Datumsformat
 		{ "$A\sim A$":}\par
 		Let $\iota$ be the identity function.\\
 		{ "$A\sim B\implies B\sim A$":}\par
-		As $\iota$ is an isometric isomorphism it is bijective and therefore its inverse $\iota^{-1}$ exists. Using $\iota^{-1}$, $B\sim A$.\\
+		As $\iota$ is an isometric function it is injective and therefore its left inverse $\iota^{-1}$ exists. Using $\iota^{-1}$, $B\sim A$.\\
 		{ "$A\sim B\land B\sim C\implies A\sim C$":}\par
-		The composition of two isometric isomorphisms is an isometric isomorphism and therefore $A\sim C$.
+		The composition of two isometric functions is an isometric function and therefore $A\sim C$.
 	\end{myproof}
 	
 	\newpage
@@ -578,7 +579,7 @@ date=short                % Datumsformat
 	
 	\subsection{Other Non Circular Gears}\label{non-circular}
 	\begin{mytheorem}\label{theorem:non-circular}
-		Let $\gamma$ be a simple, closed curve.\\
+		Let $\gamma$ be a simple, closed curve, $\gamma: [0,2\pi)\rightarrow\mathbb{R}^2$.\\
 		$(\gamma, n, m_0, M)$ is a gear if $4n\cdot \text{inf}\{d(\gamma(t),\gamma(\pi+t)),t\in[0,2\pi)\}>L(\gamma)$. Furthermore $r$ can be calculated using a system of $4n$ equations:
 		\begin{align}
 			\forall i\in\mathbb{Z}_{4n}:d(\gamma(\varphi_i),\gamma(\varphi_{i+1}\Mod{2\pi}))=r \label{eq:eqsys}
