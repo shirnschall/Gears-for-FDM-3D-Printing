@@ -4,6 +4,14 @@
 %% (C) Hirnschall Sebastian 2016 
 \date{\today}
 
+\usepackage[hidelinks]{hyperref}
+\hypersetup{
+	pdftitle={Designing Circular and Non-Circular Gears for FDM 3d-Printing},
+	pdfsubject={Designing Circular and Non-Circular Gears for FDM 3d-Printing},
+	pdfauthor={Sebastian Hirnschall},
+	pdfkeywords={gears, circular, non-circular, fdm, fff, sla, 3d-printing}
+}
+
 
 \usepackage[
 backend=biber,
@@ -256,6 +264,7 @@ date=short                % Datumsformat
 \makeindex
 \newcommand{\ind}[1]{\textit{#1}\index{#1}}
 
+\usepackage{breqn}
 
 
 \begin{document}
@@ -380,7 +389,7 @@ date=short                % Datumsformat
 		%abbidung close up 3 zaehne
 	
 	\subsection{Drawing a Gear}\label{sec:drawing}
-	Start by drawing the outline of the gear. As we will see in \cref{non-circular} this can be any convex shape. As an example we will take a look at a circular gear. Then, using a compas, mark points with distance $r$ on the outline of your shape and draw a circle with radius $r$ on every second mark. We will see in \cref{section-gears} or in the examples how to calculate $r$.
+	Start by drawing the outline of the gear. As we will see in \cref{non-circular} this can be any convex shape. As an example we will take a look at a circular gear. Then, using a compass, mark points with distance $r$ on the outline of your shape and draw a circle with radius $r$ on every second mark. We will see in \cref{section-gears} or in the examples how to calculate $r$.
 	\begin{figure}[h!]
 			\begin{tikzpicture}[x=1mm,y=1mm,scale = 2]
 			\draw[dashed] (0,0) circle[radius = 7.508037642];
@@ -439,13 +448,15 @@ date=short                % Datumsformat
 	
 	\begin{mydefinition}\label{def:gear1}
 		\index{$\gamma$}\index{$n$}\index{$r$}\index{$m_0$}\index{$(m_i)_{i\in\mathbb{Z}_{2n}}$}\index{$M$}
-		A tuple $(\gamma, n, r, m_0, M)$ where $\gamma:[0,2\pi)\to\mathbb{R}^2$ is a simple closed curve, $n\in\mathbb{N}$, $r\in\mathbb{R}$, $m_0\in\gamma[[0,2\pi)]$ and $M\in\mathbb{R}^2$ is called a \ind{gear} if the enclosed area of $\gamma$ is convex. 
+		Let $\gamma:[0,2\pi]\mapsto\mathbb{R}^2$ be a simple, closed and rectifiable curve such that a convex domain $\Omega$ with $\partial\Omega = \gamma[[0,2\pi]]$ exists.\\
+		We'll call a tuple $(\gamma, n, m_0, M)$ where $n\in\mathbb{N}$ a \ind{gear} if it is possible to find a polygon $\Gamma$ with $4n$ vertices $(m_i)_{i\in\mathbb{Z}_{4n}}\in\gamma[[0,2\pi]]$ such that $\exists!r\in\mathbb{R}\forall i\in\mathbb{Z}_{4n}:d(m_i,m_{i+1})=r\land r>0$. 
 	\end{mydefinition}
 
-	At this point it is not clear if a gear is well-defined as \cref{def:gear1} demands only a single tooth-centerpoint $m_0$ and not a set containing every tooth-centerpoint. The fact that $(m_i)_{i\in\mathbb{Z}_{2n}}$ can be represented by $m_0$ is one of the findings of \cref{theorem:non-circular}.
+	At this point it is not clear if a gear is well-defined as \cref{def:gear1} demands only a single tooth-centerpoint $m_0$ and not a set containing every tooth-centerpoint. The fact that $(m_i)_{i\in\mathbb{Z}_{4n}}$ can be represented by $m_0$ is one of the findings of \cref{theorem:non-circular}.
 	\newline
 	If $\gamma$ is a circle we will sometimes replace it with its radius $R\in\mathbb{R}$.
-	Furthermore $M$ is defined as point with distance $d(M,\gamma(\varphi)) = ||\gamma(\varphi)||_2, \forall\varphi\in[0,2\pi)$. Since $M$ is defined by $\gamma$ it is not required. However we will only omit $M$ if it is $0$.
+	Furthermore $M$ is defined as the center point of $\Omega$. $M\coloneqq\frac{1}{\lambda^2(\Omega)}\int_{\Omega}xd\lambda^2$.
+	Since $M$ is defined by $\gamma$ it is not required. However we will only omit $M$ if it is $0$.
 	
 	\begin{mydefinition}
 		Two gears $A$ and $B$ \ind{fit together} if 
@@ -457,7 +468,7 @@ date=short                % Datumsformat
 	\begin{mydefinition}\label{def:rel}
 		Two gears $A$ and $B$ are of the \ind{same size} or shape, if it is possible to map the image of $\gamma_A$ to the image of $\gamma_B$ without changing its size:
 		\begin{align}
-		\exists\iota: d(\iota(x),\iota(y))=d(x,y)\land\iota(\gamma_A[[0,2\pi)]) = \gamma_B[[0,2\pi)].\label{imp:sim}
+		\exists\iota (\forall x,y\in\mathbb{R}^2: d(\iota(x),\iota(y))=d(x,y))\land(\iota[\gamma_A[[0,2\pi)]] = \gamma_B[[0,2\pi)]).\label{imp:sim}
 		\end{align}
 		We call two gears $A$ and $B$ \ind{similar}\index{$\sim$} and write $A\sim B$ if they are of the same size and
 		\begin{gather*}
@@ -491,21 +502,24 @@ date=short                % Datumsformat
 	\subsection{Circular Gears}\label{section-circ}
 	%Designing a circular gear is straightforward. We start by drawing a circle $K$ with radius $R$. This will be the size of our final gear. We then look for a sequence of smaller circles $(k_i)_{i\in I}$ with radius $r$ such that their center is on $K$, they intersect each other on $K$, they cover $K$ completely and the number of $k_i$ must be even ($|I|=2n : n\in \mathbb{N}$). This is important since the number of teeth has to be a positive integer. 
 	
-	We have already seen how to draw a circular gear $K=(R,n,r,m_0,M)$ in \cref{sec:drawing}. However $r$ has to be chosen in a way that it is possible to find a set of $2n$ points $(m_i)_{i\in\mathbb{Z}_{2n}}\in\gamma[[0,2\pi)]:d(m_i,m_{i+1})=r$.
+	We have already seen how to draw a circular gear $K=(R,n,m_0,M)$ in \cref{sec:drawing}. However $r$ has to be chosen in a way that it is possible to find a set of $4n$ points $(m_i)_{i\in\mathbb{Z}_{4n}}\in\gamma[[0,2\pi)]:d(m_i,m_{i+1})=r\land r>0$.
 	
 	%abbildung kreise auf dem kreis
 	
 	
 	\begin{mytheorem}\label{theorem-circle}
-		Given a circle $\gamma$ with radius $R$ and $n\in\mathbb{N}$, it is possible to find a sequence of $2n$ points $(m_i)_{i\in\mathbb{Z}_{2n}}\in\gamma[[0,2\pi)]:d(m_i,m_{i+1})=r$. Let $\varphi = \frac{Pi}{n}$ then
+		Given a circle $K$ with radius $R$, $(R,n\in\mathbb{N}^*,m_0\in K,M)$ is a gear. Let $\varphi = \frac{Pi}{2n}$ then
 		\begin{align}
-		R= \frac{r\cdot\cos\left( \frac{\varphi }{4}\right) }{\sin(\frac{\varphi}{2})}.\label{eq:R-r}
+		r= \frac{R\cdot\sin\left( \varphi\right) }{\cos(\frac{\varphi}{2})}.\label{eq:R-r}
 		\end{align}
 	\end{mytheorem}
 
 	\begin{myproof}
 		
-		Let $K$ be a circle with radius $R$ and center $(0,0)$ and $n = 2k$, $k\in\mathbb{N}$ we can, using polar coordinates, construct a sequence $(m_i)_{i\in\mathbb{Z}_{2n}}$, $m_i = \left(R,i\cdot\frac{\pi}{n}\text{rad}\right)$ of $2n$ points on $K$. They are evenly spaced and $r\coloneqq d(m_0,m_1)$. We can now construct a sequence $(k_j)_{j\in\mathbb{Z}_n}$of $n$ circles with radius $r$ and center $m_j:j\equiv 0 \Mod 2$. Therefore $\{x\in K:\exists i,j\in \mathbb{Z}_{2n}: d(x,m_{2i})\leq r\land d(x,m_{2j})\leq r\} = \{m_i:i\equiv 1 \Mod 2,i\in\mathbb{Z}_{2n}\}$ and $|\{m_i:i\equiv 1 \Mod 2,i\in\mathbb{Z}_{2n}\}| = n$.
+		Let $K$ be a circle with radius $R$ and center $(0,0)$ and $n\in\mathbb{N}^*$ we can, using polar coordinates, construct a sequence $(m_i)_{i\in\mathbb{Z}_{4n}}$, $m_i = \left(R,i\cdot\frac{\pi}{2n}\text{rad}\right)$ of $4n$ points on $K$. They are evenly spaced and $r\coloneqq d(m_1,m_2)$.
+		
+		%constructing the small circles k_j
+		%We can now construct a sequence $(k_j)_{j\in\mathbb{Z}_n}$of $n$ circles with radius $r$ and center $m_j:j\equiv 0 \Mod 2$. Therefore $\{x\in K:\exists i,j\in \mathbb{Z}_{2n}: d(x,m_{2i})\leq r\land d(x,m_{2j})\leq r\} = \{m_i:i\equiv 1 \Mod 2,i\in\mathbb{Z}_{2n}\}$ and $|\{m_i:i\equiv 1 \Mod 2,i\in\mathbb{Z}_{2n}\}| = n$.
 		
 		\begin{figure}[h!]
 			\centering
@@ -533,7 +547,7 @@ date=short                % Datumsformat
 			\end{tikzpicture}
 		\end{figure}
 		
-		Let $\alpha\coloneqq\sphericalangle {m_3m_2m_1}$, $\varphi\coloneqq\sphericalangle {m_1Mm_3}$ and $d\coloneqq\overline{m_3m_1}$. Using the inscribed angle theorem\autocite{inscribedangle}, we know that $\alpha=\frac{2\pi - \varphi}{2}$. By drawing a line from $M$ to $m$ we get two right triangles. $\overline{Mm_2}$ also bisects  $\varphi$, $\alpha$ and $d$. Thus
+		Let $\alpha\coloneqq\sphericalangle {m_3m_2m_1}$, $\varphi\coloneqq\sphericalangle {m_1Mm_3}$ and $d\coloneqq\overline{m_3m_1}$. Using the inscribed angle theorem\autocite{inscribedangle}, we know that $\alpha=\frac{2\pi - \varphi}{2}$. By drawing a line from $M$ to $m_2$ we get two right triangles. $\overline{Mm_2}$ also bisects  $\varphi$, $\alpha$ and $d$. Thus
 		\begin{align}
 			\frac{d}{2} = r\cdot\sin\left(\frac{\alpha}{2}\right)\label{eq:d}
 		\end{align}
@@ -553,7 +567,9 @@ date=short                % Datumsformat
 	
 	\begin{mytheorem}\label{therem-rectangle}
 		%If all four corners of a rectangle $K$ are in $\{m_i:i\in I\}$ and 
-		Let $K$ be a rectangle with side lengths of $a$ and $b$. It is possible to find a sequence of circles $(k_i)_{i\in I}$ with the same properties as in \cref{theorem-circle} if $4r\mid a$ and $4r\mid b$. Furthermore all four corners of $K$ are in $\{m_i:i\in I\}$, where $m_i$ is the center of $k_i$.
+		Let $K$ be a rectangle with side lengths $a$ and $b$, center point M and corners $A,B,C$ and $D$. Let \begin{align}
+			r\coloneqq\frac{a+b}{n},
+		\end{align}$(K,n,A,M)$ is a gear if $4r\mid a \land 4r\mid b$.
 	\end{mytheorem}
 
 	\begin{myproof}
@@ -563,25 +579,47 @@ date=short                % Datumsformat
 	
 	\subsection{Other Non Circular Gears}\label{non-circular}
 	\begin{mytheorem}\label{theorem:non-circular}
-		Let $\gamma$ be a simple, closed curve where the enclosed area is convex. $\gamma$ can be used as a gear outline. Furthermore the sequence of circlecenters $\{m_i:i\in I\}$ can be calculated using:\\
-		
-		\begin{algorithm}[H]
-			\SetAlgoLined
-			\KwResult{Write here the result }
-			I = 2 times number of teeth\;
-			\While{While condition}{
-				instructions\;
-				\eIf{condition}{
-					instructions1\;
-					instructions2\;
-				}{
-					instructions3\;
-				}
-			}
-			\caption{Calculating $\{m_i:i\in I\}$}
-		\end{algorithm}
+		Let $\gamma$ be a simple, closed curve.\\
+		$(\gamma, n, m_0, M)$ is a gear if $4n\cdot \text{inf}\{d(\gamma(t),\gamma(\pi+t)),t\in[0,2\pi)\}>L(\gamma)$. Furthermore $r$ can be calculated using a system of $4n$ equations:
+		\begin{align}
+			\forall i\in\mathbb{Z}_{4n}:d(\gamma(\varphi_i),\gamma(\varphi_{i+1}\Mod{2\pi}))=r \label{eq:eqsys}
+		\end{align}
 	\end{mytheorem}
+
+	\begin{myproof} \\
+		(i)The equations \eqref{eq:eqsys} have pairwise distinct solutions if $r>0$:\\
+		Let $\varphi_i\in[0,2\pi)$ be arbitrary but fixed.
+		As $\gamma$ is a simple closed curve, 
+		\begin{align*}
+			\text{inf}\{d(\gamma(t),\gamma(\pi+t)),t\in[0,\pi)\}>0.
+		\end{align*}
+		By using the intermediate value theorem \autocite{intermediatevalue} we know that
+		\begin{align*}
+			r<d(\gamma(\varphi_i),\gamma(\pi+\varphi_i)) \implies \exists\varphi_{i+1}\in(\varphi_i,\pi+\varphi_i):d(\gamma(\varphi_i),\gamma(\varphi_{i+1})) = r.
+		\end{align*}
+		(ii) It is possible to find $r$ such that $d(\gamma(\varphi_{n-1}),\gamma(\varphi_{0}))=r$:\\
+		First, we'll define $d_\gamma$ as the length of $\gamma$ between two points:
+		\begin{align*}
+			d_\gamma(x,y)=\Biggl|&\int_{0}^{y}|\gamma'(t)|dt + y\Mod{2\pi}l(\gamma)-\\
+							   &\int_{0}^{x}|\gamma'(t)|dt- x\Mod{2\pi}l(\gamma)\Biggr|.
+		\end{align*}
+		This integral exists because $\gamma$ is rectifiable. Using 
+		\begin{align}
+			d(\gamma(x),\gamma(y))\leq d_\gamma(x,y),\label{eq:deq}
+		\end{align}
+		we can now choose two values $\hat{r}_1=0$ and $\hat{r}_2=\frac{L(\gamma)}{n-1}$ such that
+		\begin{align*}
+			d_\gamma(0,\hat{\varphi}_{n-1}^{\hat{r}_1})\leq d_\gamma(0,\hat{\varphi}_{n-1}^{\hat{r}})\leq d_\gamma(0,\hat{\varphi}_{n-1}^{\hat{r}_2}).
+		\end{align*}
+		By using the intermediate value theorem once more together with \cref{eq:deq}, we know that 
+		\begin{align*}
+			\exists r_1&:\varphi^{r_1}_{n-1}=\pi\land d(\gamma(\varphi_{n-1}),\gamma(\varphi_0))>r_1\\
+			\exists r_2&:\varphi^{r_2}_{n-1}>\pi\land d(\gamma(\varphi_{n-1}),\gamma(\varphi_0))<r_2.
+		\end{align*}
+		By using the intermediate value theorem one last time, we know that $r$ exists.
+	\end{myproof}
 	
+	\newpage
 	\subsection{Examples}
 	\myexample{Circular gears with given gear ratio and centerdistance}\label[example]{ex:circ}
 	Lets say we want a 3:1 gear reduction and the center points of each gear should be 30mm apart. We can now start to build a system of equations:
@@ -614,7 +652,7 @@ date=short                % Datumsformat
 	If $r$ is too small/large change the number of teeth you specified.
 	
 	
-	\begin{figure}[h!]
+	\begin{figure}[H]
 		\centering
 		\begin{tikzpicture}[x=1mm,y=1mm]
 		\coordinate (m1) at (0,0);
@@ -954,68 +992,68 @@ date=short                % Datumsformat
 \begin{myproof}
 	
 \end{myproof}
-	\subsection{Non-constant shaft position}
-	If it is necessary that the shaft rotates and changes position a control cam can be used (\cref{fig:shaftposition}). By restricting the shaft position in the x direction it will follow the racks shape if they stay in contact. If no rotation is required a control cam in the required shape should be used on its own.
-	
-	
-	
-	
-		\begin{figure}[h!]
-		\centering
-		\begin{tikzpicture}[x=1mm,y=1mm]
-		\coordinate (m2) at (0,0);
-		%radius = 22.49196236
-		%small gear
-		\foreach \i in {0,1, ...,8}{
-			\begin{scope}[rotate around={\i*45:(m2)}]
-			%nach aussen
-			\draw (-7.508037642,0) + ({1.471832758 * cos(-88.62500000)},{1.471832758 * sin(-88.62500000)}) arc[radius=1.471832758,start angle = -88.62500000,end angle = 88.62500000];
-			%nach innen
-			\draw (m2) ++ ({180-45/2}:7.508037642) ++ ({1.471832758 * cos(-110.12500000)},{1.471832758 * sin(-110.12500000)}) arc[radius=1.471832758,start angle = -110.12500000,end angle = -294.875];
-			\end{scope}
-		}
-		
-		%rack
-		\draw (-51.51414653,-32.49196236) -- (48.570481014,-32.49196236);
-%		\foreach \i in {0,1, ...,16}{
-%			\draw ({-51.51414653+1.471832758 + 4*1.471832758*\i},-22.49196236) + ({1.471832758 * cos(0)},{1.471832758 * sin(0)}) arc[radius=1.471832758,start angle = 0,end angle = 180];
-%			\draw ({-51.51414653+1.471832758 + 2*1.471832758 + 4*1.471832758*\i},-22.49196236) + ({1.471832758 * cos(0)},{1.471832758 * sin(0)}) arc[radius=1.471832758,start angle = 0,end angle = -180];
+%	\subsection{Non-constant shaft position}
+%	If it is necessary that the shaft rotates and changes position a control cam can be used (\cref{fig:shaftposition}). By restricting the shaft position in the x direction it will follow the racks shape if they stay in contact. If no rotation is required a control cam in the required shape should be used on its own.
+%	
+%	
+%	
+%	
+%		\begin{figure}[h!]
+%		\centering
+%		\begin{tikzpicture}[x=1mm,y=1mm]
+%		\coordinate (m2) at (0,0);
+%		%radius = 22.49196236
+%		%small gear
+%		\foreach \i in {0,1, ...,8}{
+%			\begin{scope}[rotate around={\i*45:(m2)}]
+%			%nach aussen
+%			\draw (-7.508037642,0) + ({1.471832758 * cos(-88.62500000)},{1.471832758 * sin(-88.62500000)}) arc[radius=1.471832758,start angle = -88.62500000,end angle = 88.62500000];
+%			%nach innen
+%			\draw (m2) ++ ({180-45/2}:7.508037642) ++ ({1.471832758 * cos(-110.12500000)},{1.471832758 * sin(-110.12500000)}) arc[radius=1.471832758,start angle = -110.12500000,end angle = -294.875];
+%			\end{scope}
 %		}
-		
-		\draw[domain=-51.51414653:48.570481014,smooth,variable=\x,blue] plot ({\x},{5*sin(\x*5) -18.0});
-		
-		
-		\draw (-51.51414653,-32.49196236) to[out=135,in=-45] (-51.51414653,-13.0);
-		\draw (48.570481014,-32.49196236) to[out=135,in=-45] (48.570481014,-22.49196236);
-		
-		%arrows:
-		\draw[<->] (135:10) to[out=45,in=135] (45:10);
-		\draw[<->] (-10,-27.49196236) to (10,-27.49196236);
-		
-		\end{tikzpicture}
-		\caption{Rack and Pinion}\label{fig:shaftposition}
-	\end{figure}
-
-	\begin{mytheorem}
-		Let $K$ be a circular gear with radius $r$ and center $m$ where $m_x$ is constant and $f\in C^2([0,2\pi))$ with $|f''(\varphi)| < |K''(\varphi)|$. $f$ can be used as an outline for a rack $R$ and $m_y$ will follow the curve $f+c,c\in\mathbb{R}$.
-	\end{mytheorem}\label{theorem:shaft-pos}
-
-	\begin{myproof}
-		Using \cref{theorem:non-circular} it is possible to calculate a gear profile for $K$ and $R$. Since $K$ is circular and always touching $R$, the distance between $m$ and $R$ is $r$. It is easy to see that $|f''(\varphi)| < |K''(\varphi)|$ implies that $K$ is touching $R$ in no more than one point. Thus $m_y = f(\varphi) + r + c$ where $c$ depends on the total thickness of $R$. A proper proof is omitted since it is easy to see that \cref{theorem:shaft-pos} holds true.
-	\end{myproof}
+%		
+%		%rack
+%		\draw (-51.51414653,-32.49196236) -- (48.570481014,-32.49196236);
+%%		\foreach \i in {0,1, ...,16}{
+%%			\draw ({-51.51414653+1.471832758 + 4*1.471832758*\i},-22.49196236) + ({1.471832758 * cos(0)},{1.471832758 * sin(0)}) arc[radius=1.471832758,start angle = 0,end angle = 180];
+%%			\draw ({-51.51414653+1.471832758 + 2*1.471832758 + 4*1.471832758*\i},-22.49196236) + ({1.471832758 * cos(0)},{1.471832758 * sin(0)}) arc[radius=1.471832758,start angle = 0,end angle = -180];
+%%		}
+%		
+%		\draw[domain=-51.51414653:48.570481014,smooth,variable=\x,blue] plot ({\x},{5*sin(\x*5) -18.0});
+%		
+%		
+%		\draw (-51.51414653,-32.49196236) to[out=135,in=-45] (-51.51414653,-13.0);
+%		\draw (48.570481014,-32.49196236) to[out=135,in=-45] (48.570481014,-22.49196236);
+%		
+%		%arrows:
+%		\draw[<->] (135:10) to[out=45,in=135] (45:10);
+%		\draw[<->] (-10,-27.49196236) to (10,-27.49196236);
+%		
+%		\end{tikzpicture}
+%		\caption{Rack and Pinion}\label{fig:shaftposition}
+%	\end{figure}
+%
+%	\begin{mytheorem}
+%		Let $K$ be a circular gear with radius $r$ and center $m$ where $m_x$ is constant and $f\in C^2([0,2\pi))$ with $|f''(\varphi)| < |K''(\varphi)|$. $f$ can be used as an outline for a rack $R$ and $m_y$ will follow the curve $f+c,c\in\mathbb{R}$.
+%	\end{mytheorem}\label{theorem:shaft-pos}
+%
+%	\begin{myproof}
+%		Using \cref{theorem:non-circular} it is possible to calculate a gear profile for $K$ and $R$. Since $K$ is circular and always touching $R$, the distance between $m$ and $R$ is $r$. It is easy to see that $|f''(\varphi)| < |K''(\varphi)|$ implies that $K$ is touching $R$ in no more than one point. Thus $m_y = f(\varphi) + r + c$ where $c$ depends on the total thickness of $R$. A proper proof is omitted since it is easy to see that \cref{theorem:shaft-pos} holds true.
+%	\end{myproof}
 	
 	
 	
 	
 	\subsection{Examples}
-	\myexample{Shaft following a Sinus(t) curve}
-	We want a gear such that the shaft is following a $\sin(t)$ curve. We know that $\sin(t)$ is a $2\pi$ periodic function with $\sin(t)>0,t\in(0,\pi)$ and $\sin(t)<0,t\in(\pi,2\pi)$. As seen in \cref{rack} this will result in a non convex gear shape. To use the method described in \cref{non-circular} we need a new function $g(t):=sin(t)+|min(sin[0,2\pi])|$. Thus $g(t)\geq0,t\in(0,2\pi)$ resulting in a convex gear shape. However the shaft will now follow $g(t)$ and not $\sin(t)$. Therefore we need to offset both the rack and pinion by $|min(sin[0,2\pi])|$.\\
-	We can now start by choosing a minimum radius $R:=5$ for the gear. \\
-	\myexample{cos(t)}
+%	\myexample{Shaft following a Sinus(t) curve}
+%	We want a gear such that the shaft is following a $\sin(t)$ curve. We know that $\sin(t)$ is a $2\pi$ periodic function with $\sin(t)>0,t\in(0,\pi)$ and $\sin(t)<0,t\in(\pi,2\pi)$. As seen in \cref{rack} this will result in a non convex gear shape. To use the method described in \cref{non-circular} we need a new function $g(t):=sin(t)+|min(sin[0,2\pi])|$. Thus $g(t)\geq0,t\in(0,2\pi)$ resulting in a convex gear shape. However the shaft will now follow $g(t)$ and not $\sin(t)$. Therefore we need to offset both the rack and pinion by $|min(sin[0,2\pi])|$.\\
+%	We can now start by choosing a minimum radius $R:=5$ for the gear. \\
+%	\myexample{cos(t)}
 	
 	
 	\newpage 
-	\printindex
+	%\printindex
 	\thispagestyle{firststyle}
 	\newpage
 	\printbibliography
