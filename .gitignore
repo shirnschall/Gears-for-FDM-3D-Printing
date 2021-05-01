@@ -11,4 +11,5 @@
 *.bbl
 *.icloud
 *.gz
+*.synctex(busy)
 
