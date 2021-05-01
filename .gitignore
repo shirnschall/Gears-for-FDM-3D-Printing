@@ -1,2 +1,15 @@
 *.pdf
+*.aux
+*.bcf
+*.blg
+*.idx
+*.lof
+*.log
+*.run.xml
+*.synctex.gz
+*.toc
+*.bbl
+*.icloud
+*.gz
+*.synctex(busy)
 
