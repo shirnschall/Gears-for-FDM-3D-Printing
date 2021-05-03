@@ -508,7 +508,7 @@ date=short                % Datumsformat
 	
 	
 	\begin{mytheorem}\label{theorem-circle}
-		Given a circle $K$ with radius $R$, $(R,n\in\mathbb{N}^*,m_0\in K,M)$ is a gear. Let $\varphi = \frac{Pi}{2n}$ then
+		Given a circle $K$ with radius $R$, $(R,n\in\mathbb{N}^*,m_0\in K,M)$ is a gear. Let $\varphi = \frac{\pi}{n}$ then
 		\begin{align}
 		r= \frac{R\cdot\sin\left( \varphi\right) }{\cos(\frac{\varphi}{2})}.\label{eq:R-r}
 		\end{align}
@@ -567,8 +567,9 @@ date=short                % Datumsformat
 	
 	\begin{mytheorem}\label{therem-rectangle}
 		%If all four corners of a rectangle $K$ are in $\{m_i:i\in I\}$ and 
-		Let $K$ be a rectangle with side lengths $a$ and $b$, center point M and corners $A,B,C$ and $D$. Let \begin{align}
-			r\coloneqq\frac{a+b}{n},
+		Let $K$ be a rectangle with side lengths $a$ and $b$, center point M and corners $A,B,C$ and $D$. Let 
+		\begin{align}
+			r\coloneqq\frac{a+b}{2n},
 		\end{align}$(K,n,A,M)$ is a gear if $4r\mid a \land 4r\mid b$.
 	\end{mytheorem}
 
@@ -630,9 +631,9 @@ date=short                % Datumsformat
 	Where $R_1$ and $R_2$ are the radii of the two gears and $n_1$ and $n_2$ denote the number of teeth on each.	
 	Using \cref{eq:R-r} we also know that:
 	\begin{align*}
-	\varphi_1 &= \frac{2Pi}{n_1}\\
+	\varphi_1 &= \frac{2\pi}{n_1}\\
 	R_1&= \frac{r*\cos\left( \frac{\varphi_1 }{4}\right) }{\sin(\frac{\varphi_1}{2})}\\
-	\varphi_2 &= \frac{2Pi}{n_2}\\
+	\varphi_2 &= \frac{2\pi}{n_2}\\
 	R_2&= \frac{r*\cos\left( \frac{\varphi_2 }{4}\right) }{\sin(\frac{\varphi_2}{2})}
 	\end{align*}
 	If we specify the number of teeth on either one of them lets say
@@ -694,7 +695,7 @@ date=short                % Datumsformat
 	
 	
 	\myexample{Internal ring gear}
-	A internal ring gear $K_r$ with outer diameter $D_r = 5$ should be calculated such that a smaller gear $K$ can be used to archive a $5:1$  gear reduction. The two shafts should be $1cm$ apart.\\
+	A internal ring gear $K_r$ with outer diameter $D_r = 5$ should be calculated such that a smaller gear $K$ can be used to archive a $5:1$  gear reduction. The two shafts should be $15mm$ apart.\\
 	As the two shafts are $15mm$ apart we know that
 	\begin{align*}
 		R_r-R=15.
@@ -706,9 +707,9 @@ date=short                % Datumsformat
 	to achieve the required $5:1$ ratio.
 		Using \cref{eq:R-r} we also know that:
 	\begin{align*}
-	\varphi_r &= \frac{2Pi}{n_r}\\
+	\varphi_r &= \frac{2\pi}{n_r}\\
 	R_r&= \frac{r*\cos\left( \frac{\varphi_r }{4}\right) }{\sin(\frac{\varphi_r}{2})}\\
-	\varphi&= \frac{2Pi}{n}\\
+	\varphi&= \frac{2\pi}{n}\\
 	R&= \frac{r*\cos\left( \frac{\varphi }{4}\right) }{\sin(\frac{\varphi}{2})}
 	\end{align*}
 	If we specify the number of teeth on either one of them lets say
@@ -894,10 +895,182 @@ date=short                % Datumsformat
 
 	
 	
-	\myexample{Rectangular gear with given tooth size $r$}
+	\myexample{Rectangular/square gear with given side length}
+	A square gear with side length $s=22mm$ should be calculated.\\
+	We choose $r=22/12$ according to \cref{therem-rectangle} such that $4r\mid s$.
+	Now, as 
+	\begin{align*}
+		r = \frac{2s}{2n}
+	\end{align*}
+	we can calculate the number of teeth required as
+	\begin{align*}
+		n = \frac{s}{r}.
+	\end{align*}
+	Thus $n = 12$. Note that each corner of the square/rectangle is a center-point of one of the $2n$ circles required to construct the gear.\\
+	Depending on whether we want the corners to be teeth or slots in between two teeth, two different gear outlines are possible. The possible gears for this example can be seen in \cref{fig:rectangular-gear}. \Cref{fig:rectangular-gear-smaller-r} shows the resulting gears when using a smaller teeth-size $r=22/24$.
 	
-	\myexample{Rectangular and circular gears with given gear ratio and centerdistance}
+	\begin{figure}[h!]
+		\begin{subfigure}[t]{0.5\textwidth}
+		\centering
+		\begin{tikzpicture}[x=1mm,y=1mm]
+			\coordinate (m1) at (0,0);
+			
+			\draw (m1)  + ({1 * cos(0)},{1 * sin(0)}) arc[radius = 1, start angle=0,end angle =360] ;
+			
+			\foreach \i in {0,1, ...,3}{
+				\begin{scope}[rotate around={\i*90:(m1)}]
+						\draw ({-11 + 4*1.833333*0},-11) + ({1.833333 * cos(0)},{1.833333 * sin(0)}) arc[radius=1.833333,start angle = 0,end angle = 90];
+						\draw ({-11 + 2*1.833333 + 4*1.833333*0},-11) + ({1.833333 * cos(0)},{1.833333 * sin(0)}) arc[radius=1.833333,start angle = 0,end angle = -180];
+						\foreach \j in {1,2, ...,2}{
+							\draw ({-11 + 4*1.833333*\j},-11) + ({1.833333 * cos(0)},{1.833333 * sin(0)}) arc[radius=1.833333,start angle = 0,end angle = 180];
+							\draw ({-11 + 2*1.833333 + 4*1.833333*\j},-11) + ({1.833333 * cos(0)},{1.833333 * sin(0)}) arc[radius=1.833333,start angle = 0,end angle = -180];
+						}
+				\end{scope}
+			}
+		\end{tikzpicture}
+		\subcaption{Corners are not teeth}
+		\end{subfigure}
+	\begin{subfigure}[t]{0.5\textwidth}
+	\centering
+	\begin{tikzpicture}[x=1mm,y=1mm]
+		\coordinate (m1) at (0,0);
+		
+		\draw (m1)  + ({1 * cos(0)},{1 * sin(0)}) arc[radius = 1, start angle=0,end angle =360] ;
+		
+		\foreach \i in {0,1, ...,3}{
+			\begin{scope}[rotate around={\i*90:(m1)}]
+				\draw ({-11 + 4*1.833333*0},11) + ({1.833333 * cos(0)},{1.833333 * sin(0)}) arc[radius=1.833333,start angle = 0,end angle = 270];
+				\draw ({-11 + 2*1.833333 + 4*1.833333*0},11) + ({1.833333 * cos(0)},{1.833333 * sin(0)}) arc[radius=1.833333,start angle = 0,end angle = -180];
+				\foreach \j in {1,2, ...,2}{
+				\draw ({-11 + 4*1.833333*\j},11) + ({1.833333 * cos(0)},{1.833333 * sin(0)}) arc[radius=1.833333,start angle = 0,end angle = 180];
+				\draw ({-11 + 2*1.833333 + 4*1.833333*\j},11) + ({1.833333 * cos(0)},{1.833333 * sin(0)}) arc[radius=1.833333,start angle = 0,end angle = -180];
+				}
+			\end{scope}
+		}
+	\end{tikzpicture}
+	\subcaption{Corners are teeth}
+	\end{subfigure}
+	\caption{Resulting rectangular gear for $r=22/12$}\label{fig:rectangular-gear}
+	\end{figure}
 	
+	\begin{figure}[h!]
+		\begin{subfigure}[t]{0.5\textwidth}
+			\centering
+			\begin{tikzpicture}[x=1mm,y=1mm]
+				\coordinate (m1) at (0,0);
+				
+				\draw (m1)  + ({1 * cos(0)},{1 * sin(0)}) arc[radius = 1, start angle=0,end angle =360] ;
+				
+				\foreach \i in {0,1, ...,3}{
+					\begin{scope}[rotate around={\i*90:(m1)}]
+						\draw ({-11 + 4*1.833333/2*0},-11) + ({1.833333/2 * cos(0)},{1.833333/2 * sin(0)}) arc[radius=1.833333/2,start angle = 0,end angle = 90];
+						\draw ({-11 + 2*1.833333/2 + 4*1.833333/2*0},-11) + ({1.833333/2 * cos(0)},{1.833333/2 * sin(0)}) arc[radius=1.833333/2,start angle = 0,end angle = -180];
+						\foreach \j in {1,2, ...,5}{
+							\draw ({-11 + 4*1.833333/2*\j},-11) + ({1.833333/2 * cos(0)},{1.833333/2 * sin(0)}) arc[radius=1.833333/2,start angle = 0,end angle = 180];
+							\draw ({-11 + 2*1.833333/2 + 4*1.833333/2*\j},-11) + ({1.833333/2 * cos(0)},{1.833333/2 * sin(0)}) arc[radius=1.833333/2,start angle = 0,end angle = -180];
+						}
+					\end{scope}
+				}
+			\end{tikzpicture}
+			\subcaption{Corners are not teeth}
+		\end{subfigure}
+		\begin{subfigure}[t]{0.5\textwidth}
+			\centering
+			\begin{tikzpicture}[x=1mm,y=1mm]
+				\coordinate (m1) at (0,0);
+				
+				\draw (m1)  + ({1 * cos(0)},{1 * sin(0)}) arc[radius = 1, start angle=0,end angle =360] ;
+				
+				\foreach \i in {0,1, ...,3}{
+					\begin{scope}[rotate around={\i*90:(m1)}]
+						\draw ({-11 + 4*1.833333/2*0},11) + ({1.833333/2 * cos(0)},{1.833333/2 * sin(0)}) arc[radius=1.833333/2,start angle = 0,end angle = 270];
+						\draw ({-11 + 2*1.833333/2 + 4*1.833333/2*0},11) + ({1.833333/2 * cos(0)},{1.833333/2 * sin(0)}) arc[radius=1.833333/2,start angle = 0,end angle = -180];
+						\foreach \j in {1,2, ...,5}{
+							\draw ({-11 + 4*1.833333/2*\j},11) + ({1.833333/2 * cos(0)},{1.833333/2 * sin(0)}) arc[radius=1.833333/2,start angle = 0,end angle = 180];
+							\draw ({-11 + 2*1.833333/2 + 4*1.833333/2*\j},11) + ({1.833333/2 * cos(0)},{1.833333/2 * sin(0)}) arc[radius=1.833333/2,start angle = 0,end angle = -180];
+						}
+					\end{scope}
+				}
+			\end{tikzpicture}
+			\subcaption{Corners are teeth}
+		\end{subfigure}
+		\caption{Resulting rectangular gear for $r=22/24$}\label{fig:rectangular-gear-smaller-r}
+	\end{figure}
+
+	\myexample{Rectangular and circular gears with given gear ratio and center-distance}
+	A square gear $S$ and a circular gear $C$ that fit together should be calculated given a center-distance $d = 15mm$. \\
+	We start building a system of equation:\\
+	For $S$ and $C$ to fit together we know that $r_S=r_C$. W therefore use $r=r_S=r_C$ below.
+	Given the center-distance $d=15mm$ leads to
+	\begin{align*}
+		\frac{s}{2} + R_C = 15mm.
+	\end{align*}
+	Using \cref{theorem-circle} with $\varphi = \pi/(2n_C)$, we get
+	\begin{align*}
+		R_C = \frac{r\cdot \cos\left(\frac{\varphi}{2}\right)}{\sin \left(\varphi\right)}.
+	\end{align*}
+	Furthermore, using \cref{therem-rectangle} we know that
+	\begin{align*}
+		r=\frac{s}{n_S}.
+	\end{align*}
+	As both $n_S$ and $n_C$ have to be integers we use the symmetry of $C$ to deduce that
+	\begin{align*}
+		n_S = 2kn_C\quad k\in\mathbb{N}.
+	\end{align*}
+	We can choose $k$ in a way that the resulting gear and tooth size satisfies our needs. For this example let $k=1$. Therefore $n_S = 2n_C$.\\
+	For $C$ to be symmetric we use
+	\begin{align*}
+		n_C = 12
+	\end{align*}
+	as our final equation. Solving this system of equations (numerically) results in:
+	
+	\begin{align*}
+		r &= 0.7635571812\\
+		R &= 5.837313828\\
+		s &= 18.32537235\\
+		n_C &= 12\\
+		n_S &= 24.
+	\end{align*}
+	
+	The resulting gears can be seen in \cref{fig:square-and-circ-gear} below.
+
+	\begin{figure}[h!]
+			\centering
+			\begin{tikzpicture}[x=1mm,y=1mm,scale=2]
+				\coordinate (m1) at (0,0);
+				\coordinate (m2) at (15,0);
+				
+				\draw (m1)  + ({1 * cos(0)},{1 * sin(0)}) arc[radius = 1, start angle=0,end angle =360] ;
+				\draw (m2)  + ({1 * cos(0)},{1 * sin(0)}) arc[radius = 1, start angle=0,end angle =360] ;
+				
+				\foreach \i in {0,1, ...,3}{
+					\begin{scope}[rotate around={\i*90:(m1)}]
+						\draw ({-9.162686175 + 4*.7635571812*0},9.162686175) + ({.7635571812 * cos(0)},{.7635571812 * sin(0)}) arc[radius=.7635571812,start angle = 0,end angle = 270];
+						\draw ({-9.162686175 + 2*.7635571812 + 4*.7635571812*0},9.162686175) + ({.7635571812 * cos(0)},{.7635571812 * sin(0)}) arc[radius=.7635571812,start angle = 0,end angle = -180];
+						\foreach \j in {1,2, ...,5}{
+							\draw ({-9.162686175 + 4*.7635571812*\j},9.162686175) + ({.7635571812 * cos(0)},{.7635571812 * sin(0)}) arc[radius=.7635571812,start angle = 0,end angle = 180];
+							\draw ({-9.162686175 + 2*.7635571812 + 4*.7635571812*\j},9.162686175) + ({.7635571812 * cos(0)},{.7635571812 * sin(0)}) arc[radius=.7635571812,start angle = 0,end angle = -180];
+						}
+					\end{scope}
+				}
+			
+			%small gear
+			\foreach \i in {0,1, ...,11}{
+				\begin{scope}[rotate around={\i*30:(m2)}]
+					%nach aussen
+					\begin{scope}[rotate around={15:(m2)}]
+					\draw (m2) ++ (90:5.837313828) ++ ({.7635571812 * cos(-2)},{.7635571812 * sin(-2)}) arc[radius=.7635571812,start angle = -2,end angle = 182];
+					\end{scope}
+					%nach innen
+					\draw (m2) ++ (180:5.837313828) ++ ({.7635571812 * cos(88)},{.7635571812 * sin(88)}) arc[radius=.7635571812,start angle = 88,end angle = -88];
+				\end{scope}
+			}
+		
+			\draw[|<->|] (m1) -- +(m2) node[pos=0.5,above] {\footnotesize$15mm$};
+		
+			\end{tikzpicture}
+		\caption{Resulting rectangular gear with fitting circular gear (scale 1:2)}\label{fig:square-and-circ-gear}
+	\end{figure}
 
 	\newpage 
 	%\printindex
