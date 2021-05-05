@@ -244,7 +244,7 @@ date=short                % Datumsformat
 	\par}
 \numberwithin{myexamplectr}{subsection}
 
-\crefname{example}{Example}{Examples}
+\crefname{myexamplectr}{example}{examples}
 
 %\renewenvironment{proof}[1][Beweis]{\begin{trivlist}
 %		\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
@@ -1072,6 +1072,74 @@ date=short                % Datumsformat
 		\caption{Resulting rectangular gear with fitting circular gear (scale 1:2)}\label{fig:square-and-circ-gear}
 	\end{figure}
 
+	\myexample{Elliptical gear with given size and number of teeth}\label{ex:ell-gear}
+	A gear in the shape of an ellipse $(x/a)^2+(y/b)^2=1$ with $a=30mm$ and $b=15mm$ and $n=12$ teeth should be constructed.\\
+	We start with a parametrization 
+	\begin{align*}
+		\gamma: [0,2\pi)\rightarrow\mathbb{R}^2,\quad t\mapsto\begin{pmatrix}a\cos(t)\\b\sin(t)\end{pmatrix}
+	\end{align*}
+	of the given ellipse. As $\gamma$ satisfies the requirements of \cref{theorem:non-circular}, \cref{eq:eqsys} can be used to calculate the tooth-size $r$ and the position of each tooth. As the system of equations required consists of $4n=48$ equations we can not list them here in the same way we did in previous examples. The maple code used to solve this system of equations can be found in \cref{appendix:ell-gear-code}.\\
+	Solving this system leads to:
+	\begin{align*}
+		\begin{array}{lll}
+				r = 3.024112686,\quad &  & \\
+				\varphi_{1} = 0.,\quad & \varphi_{2} = .1990159115,\quad & \varphi_{3} = .1809691691,\\
+				\varphi_{4} = .1599940895,\quad & \varphi_{5} = .1430803899,\quad & \varphi_{6} = .1305321589,\\
+				\varphi_{7} = .1213147333,\quad & \varphi_{8} = .1145167936,\quad & \varphi_{9} = .1095068588,\\
+				\varphi_{10} = .1058685767,\quad & \varphi_{11} = .1033313491,\quad & \varphi_{12} = .1017233388,\\
+				\varphi_{13} = .1009429577,\quad & \varphi_{14} = .1009429577,\quad & \varphi_{15} = .1017233388,\\
+				\varphi_{16} = .1033313491,\quad & \varphi_{17} = .1058685767,\quad & \varphi_{18} = .1095068588,\\
+				\varphi_{19} = .1145167936,\quad & \varphi_{20} = .1213147333,\quad & \varphi_{21} = .1305321589,\\
+				\varphi_{22} = .1430803899,\quad & \varphi_{23} = .1599940895,\quad & \varphi_{24} = .1809691691,\\
+				\varphi_{25} = .1990159115,\quad & \varphi_{26} = .1990159115,\quad & \varphi_{27} = .1809691691,\\
+				\varphi_{28} = .1599940895,\quad & \varphi_{29} = .1430803899,\quad & \varphi_{30} = .1305321589,\\
+				\varphi_{31} = .1213147333,\quad & \varphi_{32} = .1145167936,\quad & \varphi_{33} = .1095068588,\\
+				\varphi_{34} = .1058685767,\quad & \varphi_{35} = .1033313491,\quad & \varphi_{36} = .1017233388,\\
+				\varphi_{37} = .1009429577,\quad & \varphi_{38} = .1009429577,\quad & \varphi_{39} = .1017233388,\\
+				\varphi_{40} = .1033313491,\quad & \varphi_{41} = .1058685767,\quad & \varphi_{42} = .1095068588,\\
+				\varphi_{43} = .1145167936,\quad & \varphi_{44} = .1213147333,\quad & \varphi_{45} = .1305321589,\\ 
+				\varphi_{46} = .1430803899,\quad & \varphi_{47} = .1599940895,\quad & \varphi_{48} = .1809691691
+		\end{array}
+	\end{align*}
+	Note that we do not have to use the parameters $\varphi_i$ when constructing the gear outline. As we now know $r$ we can use a pattern, symmetry, congruence or other techniques to draw the gear in CAD. The result of this example as well as the result using a greater number of teeth can be seen in \cref{fig:ell-gear} below.\\
+	Due to the symmetry of $\gamma$ and the fact that $4\mid n$ the resulting gear outline is symmetric along the $x$ and $y$-axis.
+	
+	\begin{figure}[H]
+		\begin{subfigure}[t]{0.5\textwidth}
+			\centering
+			\includegraphics[width=60mm]{ell-gear.png}
+			\subcaption{$n=12$}
+		\end{subfigure}
+		\begin{subfigure}[t]{0.5\textwidth}
+			\centering
+			\includegraphics[width=60mm]{ell-gear-fine.png}
+			\subcaption{$n=24$}
+		\end{subfigure}
+		\caption{Resulting elliptical gear with different number of teeth}\label{fig:ell-gear}
+	\end{figure}
+	\myexample{Elliptical gear and square gear that fit together}
+	Given the elliptical gear $E$ constructed in \cref{ex:ell-gear} a fitting square gear $S$ should be calculated.\\
+	We recall that $r=1.513379781$ for $n_E=24$. We now choose the side-length $s$ of $S$ according to \cref{therem-rectangle} such that $4r\mid s$.
+	Let $s=28r$.\\
+	Note that it is very easy to calculate fitting gears if the size of at least one of them is not given.\\
+	As we now know $s$ and $r$ we can proceed to calculate $n_S=28$ using (again) the findings of \cref{therem-rectangle}:
+	\begin{align*}
+		n_S=\frac{s}{r}.
+	\end{align*}
+	The two resulting gears are shown in \cref{fig:ell-square-gear}.
+	
+	\begin{figure}[H]
+			\centering
+			\includegraphics[width=80mm]{ell-square-gear-fine.png}
+		\caption{Resulting elliptical gear with fitting square gear}\label{fig:ell-square-gear}
+	\end{figure}
+
+	
+	\newpage
+	\appendix
+	\section{Code used in the Examples}\label{appendix:code}
+	\subsection{Elliptical gear with given size and number of teeth}\label{appendix:ell-gear-code}
+	\lstinputlisting[caption=elliptical gears using maple]{ell-gear.txt}
 	\newpage 
 	%\printindex
 	\thispagestyle{firststyle}

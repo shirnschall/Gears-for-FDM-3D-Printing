@@ -1,0 +1,33 @@
+
+restart;
+with(Student[Precalculus]);
+d := proc (x, y) options operator, arrow, function_assign; Distance(x, y) end proc;
+a := 30;
+b := 15;
+
+ell := proc (t) options operator, arrow, function_assign; `<,>`(a*cos(t), b*sin(t)) end proc;
+plot([ell(t)[1], ell(t)[2], t = 0 .. 2*Pi]);
+
+n := 24;
+m := 50;
+eq := {p[1] = 0};
+NULL;
+for i to 4*n-1 do unassign('k'); unassign('l'); eq := eq union {d(ell(sum(p[k], k = 1 .. i)), ell(sum(p[l], l = 1 .. i+1)))^2 = r^2}; unassign('k'); unassign('l') end do;
+NULL;
+eq := eq union {d(ell(sum(p[k], k = 1 .. 4*n)), ell(p[1]))^2 = r^2}; unassign('k'); unassign('l');
+eq;
+
+nb := {p[1] = 0 .. 2*Pi/m};
+for i from 2 to 4*n do nb := nb union {p[i] = 0 .. 2*Pi/m} end do;
+nb;
+vars := {r};
+for i to 4*n do vars := vars union {p[i]} end do;
+vars;
+
+
+sol := fsolve(eq, vars, nb);
+
+evalf(sum(sol[k], k = 2 .. 4*n+1));
+
+
+
