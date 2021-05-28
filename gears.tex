@@ -580,10 +580,15 @@ date=short                % Datumsformat
 	
 	\subsection{Other Non Circular Gears}\label{non-circular}
 	\begin{mytheorem}\label{theorem:non-circular}
-		Let $\gamma$ be a simple, closed curve, $\gamma: [0,2\pi)\rightarrow\mathbb{R}^2$.\\
-		$(\gamma, n, m_0, M)$ is a gear if $4n\cdot \text{inf}\{d(\gamma(t),\gamma(\pi+t)),t\in[0,2\pi)\}>L(\gamma)$. Furthermore $r$ can be calculated using a system of $4n$ equations:
+		Let $\gamma$ be a simple, closed curve, $\gamma: [0,2\pi]\rightarrow\mathbb{R}^2$, such that a convex domain $\Omega\subset\mathbb{R}^2$ with $\partial\Omega = \gamma[[0,2\pi]]$ exists.\\
+		Let $d_2$ be the euklidean metric.
+		$(\gamma, n, M)$ is a gear iff $\exists (\varphi_i)_{i\in\mathbb{Z}_{4n}}$ such that
 		\begin{align}
-			\forall i\in\mathbb{Z}_{4n}:d(\gamma(\varphi_i),\gamma(\varphi_{i+1}\Mod{2\pi}))=r \label{eq:eqsys}
+			\begin{gathered}
+				\varphi_0 = 0,\qquad \varphi_i\in[0,2\pi],\qquad \sum_{i=1}^{4n-1}\varphi_i < 2\pi\\
+				\forall i\in\{0,1,\ldots ,4n-2\}: d_2\left(\gamma\left(\sum_{j=0}^i\varphi_j\right),\gamma\left(\sum_{j=0}^{i+1}\varphi_j\right)\right)^2=r^2 \\
+				d_2\left(\gamma\left(\sum_{j=0}^{4n-1}\varphi_j\right),\gamma\left(\varphi_0\right)\right)^2=r^2
+			\end{gathered}\label{eq:eqsys}
 		\end{align}
 	\end{mytheorem}
 
